@@ -1,0 +1,20 @@
+<IfModule mod_php5.c>
+
+## Adjust memory limit
+    php_value memory_limit 128M
+    php_value max_execution_time 18000
+
+## Disable magic quotes for php request vars
+
+    php_flag magic_quotes_gpc off
+
+</IfModule>
+
+## Enable rewrites
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [NC,L]
+RewriteRule ^.*$ index.php [NC,L]

@@ -1,0 +1,49 @@
+@charset "utf-8";
+/*
+  * Zendfox Framework
+ *
+ * LICENSE
+ *
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    theme
+ * @package     core_default
+ * @author      Zendfox Team of Unicode Systems <zendfox@unicodesystems.in>
+ * @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ */
+
+.tab_container{min-height: 150px;}
+.accord_container{display:inline-block;}
+.accordion-content ul li{display:inline-block;}
+.table_title_header{display:inline-block;}
+.accordion-content ul li table{width:850px;}
+.tab>table{width:650px !important;}
+
+.row .ele{width:auto;}
+.box_container{display:inline-block;}
+.box_content_container{display:inline-block;}
+.tab_content_container{display:inline-block;}
+
+.admin-nav-menu .subsub{z-index: 999 !important; position: absolute !important; left: 300px !important;}
+.required.tinymce{width:400px;}
+textarea{width: 100% !important;}
+.admin_page_title{height:34px;}
+
+span.login_name{margin-top: -35px; margin-right: 70px;}
+.login_button{margin-left: 180px !important;}
+.form-button-login span {padding-right:0px !important; padding-left:0px !important;}
+.filter.hasDatepicker{float: left;}

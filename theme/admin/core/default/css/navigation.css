@@ -1,0 +1,79 @@
+/*
+  * Zendfox Framework
+ *
+ * LICENSE
+ *
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    theme
+ * @package     core_default
+ * @author      Zendfox Team of Unicode Systems <zendfox@unicodesystems.in>
+ * @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ */
+/*** Navigation menu style ***/
+.admin-nav-menu, .admin-nav-menu * {margin:0; padding:0; list-style: none;}
+.admin-nav-menu {line-height:1.0;}
+.admin-nav-menu ul {position:absolute; top:-999em; width:auto; padding-left: 15px; /* left offset of submenus need to match (see below) */}
+.admin-nav-menu ul li a:hover{background: #ced5dc !important; text-align:left; color:#111;}
+.admin-nav-menu ul li { background:#f5f5f5 !important; min-width:109px;}
+.admin-nav-menu ul li .nav-sub-indicator{ text-indent: 0 !important; height: 12px; right: 0;}
+.admin-nav-menu li:hover {visibility:	inherit; /* fixes IE7 'sticky bug' */}
+.admin-nav-menu li {float:left; position:relative;}
+.admin-nav-menu li ul li{ padding:0 !important;}
+.admin-nav-menu a {display:block; position:relative;}
+.admin-nav-menu li:hover ul,
+.admin-nav-menu li.navHover ul {left:0; top:28px; /* match top ul list item height */ z-index:99;}
+ul.admin-nav-menu li:hover li ul,
+ul.admin-nav-menu li.navHover li ul {top:-999em;}
+ul.admin-nav-menu li li:hover ul,
+ul.admin-nav-menu li li.navHover ul {left:129px !important; /* match ul width */ top:0;}
+ul.admin-nav-menu li li:hover li ul,
+ul.admin-nav-menu li li.navHover li ul {top:-999em;}
+ul.admin-nav-menu li li li:hover ul,
+ul.admin-nav-menu li li li.navHover ul {left:10em; /* match ul width */ top:0;}
+/*** Theme ***/
+.admin-nav-menu {float:left;}
+.admin-nav-menu a {text-decoration:none;}
+.admin-nav-menu a, .admin-nav-menu a:visited{}
+.admin-nav-menu li li:hover{background:none;}
+.admin-nav-menu li li a{padding:7px 10px; text-align:left; color:#296472; font-family:Arial, Helvetica, sans-serif; font-size:11px; min-width:160px ; width:auto; font-weight:normal;}
+.admin-nav-menu li li a.nav-with-ul{text-align:left;}
+.admin-nav-menu li li li {}
+.admin-nav-menu li:hover, .admin-nav-menu li.navHover{background:url(../images/admin_nav_hover.jpg) repeat-x; height:22x; color:#fff; text-decoration:none;}
+.admin-nav-menu li.active{background:url(../images/admin_nav_hover.jpg) repeat-x; height:22x; color:#fff; text-decoration:none; }
+.admin-nav-menu li:hover, .admin-nav-menu li.navHover,
+.admin-nav-menu a:focus, .admin-nav-menu a:hover, .admin-nav-menu a:active {outline:0;}
+.admin-nav li:hover{}
+/*** Child navigation arrows **/
+.admin-nav-menu a.nav-with-ul {text-align:center; /* trigger IE7 hasLayout so spans position accurately */}
+.nav-sub-indicator {position:absolute; display:block; right:2.75em; top:6px; /* IE6 only */ width:10px; height:10px; text-indent:-999em; overflow:hidden;}
+a > .nav-sub-indicator {}
+a:focus > .nav-sub-indicator,
+a:hover > .nav-sub-indicator,
+a:active > .nav-sub-indicator,
+li:hover > a > .nav-sub-indicator,
+li.navHover > a > .nav-sub-indicator {}
+.admin-nav-menu ul .nav-sub-indicator {background-position:  0px 0;}
+.admin-nav-menu ul a > .nav-sub-indicator {background-position:  0 0;}
+.admin-nav-menu ul a:focus > .nav-sub-indicator,
+.admin-nav-menu ul a:hover > .nav-sub-indicator,
+.admin-nav-menu ul a:active > .nav-sub-indicator,
+.admin-nav-menu ul li:hover > a > .nav-sub-indicator,
+.admin-nav-menu ul li.navHover > a > .nav-sub-indicator {}
+/*** Apply shadows for all browsers except IE6 ***/
+.nav-shadow ul {float: left; border:4px solid #7186a5; background: #6d85a1;}
+.nav-shadow ul.nav-shadow-off {background: transparent;}

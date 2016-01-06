@@ -1,0 +1,152 @@
+@charset "utf-8";
+/*
+ * Zendfox Framework
+ *
+ * LICENSE
+ *
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    theme
+ * @package     core_default
+ * @author      Zendfox Team of Unicode Systems <zendfox@unicodesystems.in>
+ * @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ */
+
+body{ margin:0px; padding:0px; font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#404549; background:url(../images/fox_bg.gif) repeat-x;}
+img{border:none; outline:none;}
+a{ border:none; outline:none;}
+:focus { outline:0; }
+h1, h2, h3, h4, h5, h6, .head { margin-bottom:.4em; line-height:1.3em; color:#0A263C; }
+h1 { font-size:2em; line-height:1.17; }
+h2 { font-size:1.5em; }
+h3 { font-size:1.35em; }
+h4 { font-size:1.05em; }
+h5 { font-size:1.05em; }
+h6 { font-size:.95em; }
+/* Table */
+th {padding:0; text-align:left; vertical-align:top;}
+td {padding:0;vertical-align:top;}
+div.tpl-hint{border:1px solid #ff0000;}
+div.tpl-hint span.tpl-hint{border:1px dotted #ff0000; background-color: #FFDDDD;}
+/***************************************************/
+/*Fixing*/
+.wrapper:after, .contect-wraper:after, .content:after{ display:block; content:"."; clear:both; font-size:0; line-height:0; height:0; overflow:hidden;}
+.wrapper{ width:100%; }
+/*header*/
+.header-wrapper{ width:1000px;  margin:0 auto;}
+.header{ width:986px; padding: 0 7px;  background:url(../images/header_bg.jpg) repeat-x #fff; }
+.header-top{height:60px; padding: 5px 0 0;}
+.header-top-logo{ float:left; padding-left:16px; text-align: left;}
+.header-top-link{ float:left;  text-align:right; padding-right:10px; padding-top:16px; width: 396px;}
+.header-top-link-text{ float:right; }
+.header-top-link-text ul{ margin: 0; padding: 0; list-style: none;}
+.header-top-link-text ul li{ float: left;}
+.header-top-link-text ul li a{ text-decoration: none; padding: 5px;}
+.header-top-link-text ul li a:hover{ text-decoration: underline;}
+.header-top-link-img{ float:right; width:300px; padding-top:5px; position: relative;}
+.header-top-link-img ul{margin:0px; padding:4px; font:14px; color:#4fa1bf; font-weight:bold; float: right; width: 166px; border: 1px solid #e5e5e5; border-radius: 6px 6px 6px 6px;}
+.header-top-link-img ul li{list-style:none;  float: left; padding: 0 0 0 10px;}
+.header-top-link-img ul li a{font:14px; color:#4fa1bf; font-weight:bold; text-decoration:none}
+.header-top-link-img ul li a:hover{font:14px; color:#288eb4; font-weight:bold; text-decoration:none}
+.header-top-link-img .header_login{background: url(../images/login_bt.png) no-repeat; width: 64px; height: 20px; display: block;}
+.header-top-link-img .header_login:hover{background: url(../images/login_bt_ho.png) no-repeat;}
+.header-top-link-img .header_register{background: url(../images/register.png) no-repeat; width: 75px; height: 20px; display: block;}
+.header-top-link-img .header_register:hover{background: url(../images/register_ho.png) no-repeat;}
+.root_bar{background: url(../images/root_bg.png) repeat-x; height: 42px;  margin-top: 0px;}
+.root_bar h2{color: #231111; font-size: 20px; font-weight: normal; padding: 7px; text-align:left;}
+.root_bar h2 span{color: #5bbbe4; font-size: 14px;}
+
+/*content bar*/
+.contect-wraper{width:1000px;  margin:0 auto; background:#fff;}
+.content{width:1000px; min-height:630px; float:left;}
+.col1 .content-mid{width:1000px; margin-top:0;}
+.col2-right{}
+.col2-right .col-right{float: right; width: 250px; text-align: left;}
+.col2-right .content{float: left; width: 750px; margin-bottom: 25px;}
+.col2-right .col-right .steps_right{padding:5px;}
+.col2-right .col-right .steps_right p.inst{}
+.col2-right .col-right .steps_right p.inst span a{color:#1378ce; text-decoration: underline; line-height: 20px;}
+.col2-right .col-right .steps_right h2{font-size: 16px; color: #4d4e4e; font-weight: normal; border-bottom: 2px solid #399ec9;}
+.col2-right .col-right .steps_right ul{list-style: none; padding: 0; margin: 0;}
+.col2-right .col-right .steps_right ul li{margin-bottom: 4px; color: #399ec9; padding: 5px; font-weight: bold; border-bottom: 1px dotted #989ea2;}
+.col2-right .col-right .steps_right ul li.selected{color: #f66646; background: #faf9ec;}
+.col2-right .content .cont-box-container{padding: 0 12px; text-align: left;}
+.col2-right .content .cont-box-container .steps_left_cont{}
+.col2-right .content .cont-box-container .steps_left_cont h2{color:#f16b43; font-size: 18px; font-weight: normal; padding: 0 0 5px 0; margin: 18px 0 8px;}
+.col2-right .content .cont-box-container .steps_left_cont .inst_text_area{ padding: 0 5px 10px; margin: 0 0 25px; overflow-y: scroll; height:300px; border: 1px solid #ebeeef; color:#666666; font-size: 11px; line-height: 17px;}
+.col2-right .content .cont-box-container .btn_div{border-top: 1px dotted #ebeeef; padding-top: 10px; float: left; width: 728px;}
+.col2-right .content .cont-box-container .btn_div label .checkbox_lisence {float: left; width: 15px;}
+.col2-right .content .cont-box-container .btn_div label span {display: block; float: left; font-weight: bold;}
+.col2-right .content .cont-box-container .btn_div button{float:right; margin-left: 8px;}
+.liscen{}
+.liscen label{font-weight: bold; float: left; margin-top: 3px;}
+.req{color:#ff0000; font-size: 11px;}
+.local_main{}
+.local_in{background: #f8f8f8; border: 1px solid #a9a8a8; padding: 10px; margin-bottom: 15px;}
+.local_in h3{background: #5d5f63; color: #ffffff; font-size: 14px; font-weight: normal; padding:3px 5px; margin:0;}
+.local_in ul{margin:10px 0px; padding: 0; list-style: none;}
+.local_in ul li{margin-bottom: 8px; display: inline-block;}
+.local_in .input-box {float: left; padding: 0 18px 0 5px; width: 275px;}
+.local_in .input-box label{display: block; padding-bottom: 3px; font-weight: bold;}
+.local_in .input-box select, input{font-size: 12px; padding: 2px; float: left; width: 275px; border: 1px solid #e3e9ef; border-top-color: #abadb3;}
+.local_in .user_name{width: 573px;}
+.local_in .user_name .input-box input, .encr input, #db_table_prefix{width: 573px;}
+.error{background: #feeaea;}
+.errMsg{color: #ff0000; font-size: 11px;}
+.local_in .input-box select{width: 350px;}
+.local_in.sess .input-box, .local_in.sess .input-box select{width: 578px;}
+.local_in.web_access .input-box{width: 600px;}
+.local_in.web_access .input-box input{width: 575px;}
+.local_in.sett .input-box{width: 400px;}
+.check-box label{float: left; padding-top: 2px; border: none;}
+#site_secure_url_in_frontend, #site_secure_url_in_admin{width: 15px; margin-left: 0;}
+
+/* Footer */
+.footer-wrapper{width:100%;  margin:0 auto;  background: #404549; border-top: 4px solid #313131;}
+.footer{width:1000px; margin: 0 auto;}
+.footer-menu{height:25px; padding-top:10px;  text-align:center; float: right;}
+.footer-menu ul{margin:0px; padding:0px; float: right;}
+.footer-menu ul li{list-style:none; padding-left:22px; float:left;}
+.footer-menu ul li a{font:12px; color:#b5bbbb; text-decoration:none;}
+.footer-menu ul li a:hover{font:12px; color:#d8d8d8; text-decoration:none;}
+.footer-btm{height:28px; font-size:12px; color:#AFB3B6; text-align:center; padding-top:8px;}
+/* end footer*/
+
+button.button{background: none; border: 0 none; cursor: pointer; margin: 0; overflow: visible; padding: 0; width: auto;}
+button.button span{background:#22b2d4; border: 1px solid #008eaf; color: #FFFFFF; display: block; font: bold 12px/19px Arial,Helvetica,sans-serif; height: 19px; padding: 0 8px; margin: 0; text-align: center; white-space: nowrap;  }
+button.button span span{border: none; padding: 0;}
+button.disable{background: none; border: 0 none; cursor: pointer; margin: 0; overflow: visible; padding: 0; width: auto;}
+button.disable span{background:#cccccc; border: 1px solid #c5c5c5; color: #FFFFFF; display: block; font: bold 12px/19px Arial,Helvetica,sans-serif; height: 19px; padding: 0 8px; margin: 0; text-align: center; white-space: nowrap;  }
+button.disable span span{border: none; padding: 0;}
+button.enable{background: none; border: 0 none; cursor: pointer; margin: 0; overflow: visible; padding: 0; width: auto;}
+button.enable span{background:#22b2d4; border: 1px solid #008eaf; color: #FFFFFF; display: block; font: bold 12px/19px Arial,Helvetica,sans-serif; height: 19px; padding: 0 8px; margin: 0; text-align: center; white-space: nowrap;  }
+button.enable span span{border: none; padding: 0;}
+button.button.back{margin-right: 5px;}
+.configure_error{color:#333333; padding-bottom: 10px;}
+.checkbox_lisence{width: 10px; margin: 1px 5px 0 0; border: none;}
+
+/*Error Messages*/
+.msgbox ul.errors{margin:0px; padding:0px; list-style:none; border:1px solid #ff0000; background:url(../images/error.png) no-repeat 10px 3px #ffffff;}
+.msgbox ul li.msg_error{text-align:left; padding:7px 0 1px 43px; height:23px; color:#ff0000;}
+
+/*Licence*/
+.licence h1 {display: inline-block; font-size: 15px; color:#1A7FAA; font-weight: normal; margin: 5px 0 0;}
+.licence h3{font-size: 12px; color:#333; font-weight: bold;}
+.licence ol {padding-left: 25px;}
+.lists {border-bottom: 1px solid #D5D5D5; margin-bottom: 15px; padding: 0;}
+.licence p{font-size:12px; font-weight: normal; color:#555; margin: 0 0 8px;}
+.licence a{color:#666; white-space: nowrap;}
