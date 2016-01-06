@@ -1,0 +1,63 @@
+<?php
+/**
+ * Zendfox Framework
+ *
+ * LICENSE
+ *
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    views
+ * @package     core_default
+ * @author      Zendfox Team of Unicode Systems <zendfox@unicodesystems.in>
+ * @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ */
+/**
+ * Packages Dependency view
+ *
+ * @see Fox_Extensionmanager_View_Admin_Dependency
+ */
+?>
+<?php $packageInfo = $this->getInfo(); ?>
+<div class="table_container">
+    <table border="0" width="100%" cellspacing="0" cellpadding="0">
+        <thead class="table_header">
+            <tr>
+                <th class="table_header_border" align="center">Package Name</th>
+                <th class="table_header_border" align="center">Version</th>
+                <th class="table_header_border" align="center">Summary</th>
+                <th class="table_header_border" align="center">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="table_odd_row">
+                <td align="center"><?php echo isset($packageInfo['name']) ? $packageInfo['name'] : ""; ?></td>
+                <td align="center"><?php echo isset($packageInfo['version_info']) ? $packageInfo['version_info'] : ""; ?></td>
+                <td align="center"><?php echo isset($packageInfo['summary']) ? $packageInfo['summary'] : ""; ?></td>
+                <td align="center"><?php echo isset($packageInfo['stability']) ? Fox::getModel('extensionmanager/package/state')->getOptionText($packageInfo['stability']) : ""; ?></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="action-list">
+    <?php if($msgs = $this->getMessages()): ?>
+        <?php foreach ($msgs as $msg): ?>
+        <p class="notice-msg"><?php echo $msg; ?></p>
+        <?php endforeach; ?>
+    <?php endif; ?>
+    <button type="button" onclick="return downloadPackage()" class="button form-button"><span>Proceed To Install</span></button>
+    <button type="button" class="button form-button" onclick="window.location='<?php echo $this->getUrl("*/*/") ?>'"><span>Cancel Installation</span></button>
+</div>

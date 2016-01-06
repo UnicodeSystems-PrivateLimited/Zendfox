@@ -1,0 +1,49 @@
+<?php
+/**
+* Zendfox Framework
+ *
+ * LICENSE
+ *
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    views
+ * @package     core_default
+ * @author      Zendfox Team of Unicode Systems <zendfox@unicodesystems.in>
+ * @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ */
+
+/**
+ * Blank container
+ * 
+ * @see Fox_Core_View_Admin_Container
+ */
+?>
+<div id="<?php echo $this->getId(); ?>">
+    <div class="admin_page_title"><table width="100%" cellpadding="0" cellspacing="0"><tr><td><h1><?php echo $this->getHeaderText(); ?></h1></td>
+                <td align="right">
+                    <?php foreach ($this->getButtons() as $button): ?>
+                        <button class="button <?php echo (isset($button['style_class']) ? $button['style_class'] : $this->getDefaultStyleClass()) ?>" id="<?php echo (isset($button['id']) ? $button['id'] : '') ?>" name="<?php echo (isset($button['name']) ? $button['name'] : (isset($button['id']) ? $button['id'] : '')) ?>" type="button" onclick="window.open('<?php echo (isset($button['url']) ? $button['url'] : '') ?>','<?php echo (isset($button['window']) ? $button['window'] : '_self') ?>','false')"><span><?php echo (isset($button['button_text']) ? $button['button_text'] : '') ?></span><span class="<?php echo (isset($button['icon_class']) ? $button['icon_class'] : $this->getDefaultIconClass()) ?>"></span></button>
+                    <?php endforeach; ?>
+                </td></tr></table></div>
+    <div><?php echo $this->getContent('__form__') ?></div>
+</div>
+<script type="text/javascript" src="<?php echo $this->themeUrl('js/formContainer.js') ?>"></script>
+<script type="text/javascript">
+<?php foreach ($this->formScripts as $script): ?>
+    <?php echo $script; ?>
+<?php endforeach; ?>
+</script>

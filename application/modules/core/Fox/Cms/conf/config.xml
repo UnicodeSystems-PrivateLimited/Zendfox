@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+* Zendfox Framework
+ *
+ * LICENSE
+ *
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    Fox
+ * @package     Fox_Cms
+ * @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ */
+-->
+<config>
+    <dependents>
+        <dependent>Core</dependent>
+    </dependents>
+    <web></web>
+    <admin>
+        <acl>
+            <cat label="CMS" order="1">
+                <cat label="Pages" order="0">
+                    <resource name="admin/cms_page" order="0">
+                        <action name="save" label="Save Page" order="0">
+                            <dependents>
+                                <action name="index" />
+                                <action name="ajax-table" />
+                                <action name="edit" />
+                                <action name="add" />
+                            </dependents>
+                        </action>
+                        <action name="delete" label="Delete Page" order="1">
+                            <dependents>
+                                <action name="index" />
+                                <action name="ajax-table" />
+                                <action name="edit" />
+                            </dependents>
+                        </action>
+                    </resource>
+                </cat>
+                <cat label="Blocks" order="1">
+                    <resource name="admin/cms_block" order="0">
+                        <action name="save" label="Save Block" order="0">
+                            <dependents>
+                                <action name="index" />
+                                <action name="ajax-table" />
+                                <action name="edit" />
+                                <action name="add" />
+                            </dependents>
+                        </action>
+                        <action name="delete" label="Delete Block" order="1">
+                            <dependents>
+                                <action name="index" />
+                                <action name="ajax-table" />
+                                <action name="edit" />
+                            </dependents>
+                        </action>
+                    </resource>
+                </cat>
+            </cat>
+        </acl>
+        <menus>
+            <menu label="CMS" order="0">
+                <item action="admin/cms_page" order="0">Pages</item>
+                <item action="admin/cms_block" order="1">Blocks</item>
+            </menu>
+        </menus>
+    </admin>
+    <common></common>
+</config>

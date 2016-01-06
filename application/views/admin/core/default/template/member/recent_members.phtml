@@ -1,0 +1,56 @@
+<?php
+/**
+ * Zendfox Framework
+ *
+ * LICENSE
+ *
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    views
+ * @package     core_default
+ * @author      Zendfox Team of Unicode Systems <zendfox@unicodesystems.in>
+ * @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ */
+
+/**
+ * Recent members dashboard block
+ *
+ * @see Fox_Member_View_Admin_Dashboard
+ */
+$recentMembers=$this->getRecentMembers(5);
+?>
+<h2>Recent Members</h2>
+<div class="dash_left_cont">
+   <?php if($recentMembers->getTotalItemCount() > 0) : ?>
+    <ul>
+        <?php foreach($recentMembers as $member): ?>
+        <li>
+            <span class="recent_member_text">
+                <a href="<?php echo Fox::getUrl('member/admin_member/edit', array('id'=>$member['id']));?>"><?php echo $member['first_name'].' '.$member['last_name']; ?></a>
+            </span>
+            <span class="recent_member_date"><?php echo Fox_Core_Model_Date::__toLocaleDate(strtotime($member['join_date']),'d M, Y') ?></span>
+        </li>
+        <?php endforeach; ?>
+    </ul>
+     <?php else: ?>
+    <ul>
+        <li class="dashboard_member_no_records">
+            No Records Found
+        </li>
+    </ul>
+    <?php endif; ?>
+</div>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Zendfox Framework
+ * 
+ * LICENSE
+ * 
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    Fox
+ * @package     Fox_Admin
+ * @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ */
+-->
+<settings>
+    <items>
+        <item name="admin" label="Admin" menu="system" order="4">
+            <sections>
+                <section label="Url Options" name="url" order="0">                    
+                    <field name="key" label="Url Key" inputType="text" order="0">
+                        <validation>required</validation>
+                        <description>Admin path after base url and should not have spaces</description>
+                    </field> 
+                </section>
+                <section label="Password Options" name="password" order="1">
+                    <field name="forgot_email_template" label="Forgot Email Template" inputType="select" order="0">
+                        <sourceModel>core/email/template</sourceModel>
+                        <default>8</default>
+                    </field>
+                    <field name="forgot_email_sender" label="Forgot Email Sender" inputType="select" order="1">
+                        <sourceModel>core/email/config</sourceModel>
+                        <default>general</default>
+                    </field>
+                </section>
+                <section label="Analytics Options" name="analytics" order="3">
+                    <field name="enable_charts" label="Enable Chart" inputType="select" order="0">
+                        <options>
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </options>
+                        <default>0</default>
+                    </field>
+                    <field name="ga_account_name" label="Account Name" inputType="text" order="1">
+                        <description>Must be same as provided in google analytics</description>
+                    </field>                    
+                    <field name="ga_email" label="Google Analytics Email" inputType="text" order="2">
+                        <validation>email</validation>
+                    </field>
+                    <field name="ga_password" label="Google Analytics Password" inputType="password" order="3"></field>
+                </section>
+            </sections>
+        </item>
+    </items>
+</settings>

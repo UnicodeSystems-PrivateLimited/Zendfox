@@ -1,0 +1,53 @@
+<?php
+/**
+ * Zendfox Framework
+ *
+ * LICENSE
+ *
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    views
+ * @package     core_default
+ * @author      Zendfox Team of Unicode Systems <zendfox@unicodesystems.in>
+ * @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ */
+
+/**
+ * Html template
+ *
+ * @see Fox_Core_View_Container
+ */
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head><?php echo $this->getContent('head'); ?></head>
+    <body<?php echo $this->getBodyClass() ? ' class="' . $this->getBodyClass() . '"' : '' ?>>
+        <div class="wrapper">
+            <div class="page">
+            <div class="header_wrapper"><?php echo $this->getContent('header')?></div>
+            <div class="content-wrapper col2-right">
+                <div class="content">                    
+                    <div class="column-main"><?php echo $this->getContent('content'); ?></div>
+                    <div class="column-right"><?php echo $this->getContent('right'); ?></div>
+                </div>
+            </div>
+        </div>
+            <div class="footer-wrapper"><?php echo $this->getContent('footer'); ?></div>
+        </div>
+        <?php echo $this->getContent('profiler');?>
+    </body>
+</html>

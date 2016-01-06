@@ -1,0 +1,85 @@
+<?php
+/**
+ * Zendfox Framework
+ *
+ * LICENSE
+ *
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    views
+ * @package     core_default
+ * @author      Zendfox Team of Unicode Systems <zendfox@unicodesystems.in>
+ * @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ */
+/**
+ * Providers view
+ *
+ * @see Fox_Extensionmanager_View_Admin_Generate_Add_Providers
+ */
+?>
+<?php $data = Fox::getModel('extensionmanager/session')->getFormData();
+$providersName = array('0'=>'');
+$providersEmail = array('0'=>'');
+if($data):
+    $providersName = $data['providers']['name'];
+    $providersEmail = $data['providers']['email'];
+endif;
+?>
+<div class="table_container" <?php if($this->getId()): echo 'id="'.$this->getId().'"'; endif;?>>
+        <table border="0" width="100%" cellspacing="0" cellpadding="0" id="provider-table">
+            <thead>
+                <tr class="table_header">
+                    <th class="table_header_border" align="center" style="width: 35%"><span>Name</span><span class="asterisk">*</span></th>
+                    <th class="table_header_border" align="center" style="width: 35%"><span>Email</span><span class="asterisk">*</span></th>
+                    <th class="table_header_border" align="center" style="width: 30%"><span>Remove</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php $i = 0;foreach($providersName as $providerName): ?>
+                    <tr class="table_even_row">
+                        <td><input type="text" name="providers[name][]" value="<?php echo $providerName;?>" class="required" style="width: 230px"/></td>
+                        <td><input type="text" name="providers[email][]" value="<?php echo $providersEmail[$i];?>" class="required email" style="width: 230px"/></td>
+                        <td align="right"><button type="button" class="button form-button2 remove-button" onclick="deleteRow(this);"><span>Remove</span><span class="del"></span></button></td>
+                    </tr>
+                <?php $i++; endforeach; ?>
+            </tbody>
+            <tfoot>
+                <tr class="table_odd_row">
+                    <td colspan="3" align="right" class="add-author">
+                        <button type="button" class="button form-button" onclick="addRow()"><span>Add Author</span><span class="plus"></span></button>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+<script type="text/javascript">
+var c = 0, tBody, tr;
+jQuery(document).ready(function(){
+    tBody = jQuery('#provider-table tbody');
+    tr = tBody.children('tr').first().attr("id",'author-'+ c++);
+});
+function addRow(){
+    cloneTr = tr.clone().attr("id",'author-'+ c++);
+    cloneTr.find('input').val('').removeClass('error');
+    cloneTr.find('button').removeClass('remove-button');
+    cloneTr.find('.errMsg').remove();
+    tBody.append(cloneTr);
+}
+function deleteRow(element){
+    jQuery(element).parent().parent().remove();
+}
+</script>

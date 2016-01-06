@@ -1,0 +1,202 @@
+<?php
+/**
+ * Zendfox Framework
+ *
+ * LICENSE
+ *
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    views
+ * @package     core_default
+ * @author      Zendfox Team of Unicode Systems <zendfox@unicodesystems.in>
+ * @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ */
+/**
+ * Install Packages View
+ *
+ * @see Fox_Extensionmanager_View_Admin_Manager
+ */
+?>
+<?php if (!is_writable(Fox::getExtensionDirectoryPath())): ?>
+    <p>Extensions directory should have writable permissions.</p>
+<?php endif; ?>
+<div class="extension-manager">
+    <div class="tabs">
+        <p class="errors" id="defaultError" style="display: none"></p>
+        <div class="tab tab0">
+            <h3 class="install-heading">Install Extension</h3>
+            <div class="tabContent">
+                <ul class="list extension-list">
+                    <li>
+                        <span>Go to Fox package store <a href="<?php echo $this->getFoxMarketStoreUrl()?>" target="_blank" title="<?php echo $this->getFoxMarketStoreUrl()?>">fox market</a></span>
+                    </li>
+                    <li>
+                        <form id="pkgInstallForm" action="<?php echo Fox::getUrl('*/*/prepare-package') ?>" method="post">
+                            <div class="fields">
+                                <label for="pkgKey">Paste Fox package key to install</label>
+                                <input type="input" name="pack_key" id="pkgKey" class="required" title="Enter Fox Extension key"/>
+                            </div>
+                            <div class="action install-button">
+                                <button class="button form-button" onclick="jQuery('#proceedToInstall').html('')"><span>Install</span></button>
+                            </div>
+                        </form>
+                    </li>
+                </ul>
+                <div id="proceedToInstall"></div>
+                <div id="status" style="display: none"></div>
+            </div>
+        </div>
+        <div class="tab tab1">
+            <h3></h3>
+            <div class="tabContent">
+            </div>
+        </div>
+        <div class="tab tab2">
+            <h3 class="install-heading">Installed Packages</h3>
+            <div class="tabContent" id="installed-packages">
+                <?php echo $this->getContent('packages'); ?>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $("body").addClass("zendfox-pkg-installer");
+    jQuery(document).ready(function(){
+        jQuery('#pkgInstallForm').submit(function(event){
+            event.preventDefault();
+            var formData = jQuery(this).serialize();
+            jQuery('#defaultError').html('').hide();
+            clearStatus();
+            _sendRequest(jQuery(this).attr('action'),formData);
+        });
+    });
+    
+    var url_downloadPackage = '<?php echo $this->getUrl("*/*/download-package") ?>';
+    var url_installPackage = '<?php echo $this->getUrl("*/*/install-package") ?>';
+    var url_reinstallPackage = '<?php echo $this->getUrl("*/*/reinstall-package") ?>';
+    var url_uninstallPackage = '<?php echo $this->getUrl("*/*/uninstall-package") ?>';
+    var url_upgradePackage = '<?php echo $this->getUrl("*/*/upgrade-package") ?>';
+    var url_finishUpgrade = '<?php echo $this->getUrl("*/*/finish-upgrade") ?>';
+    
+    function setStatus(status){
+        if(status) jQuery("#status").append("<code>"+status+"</code><br/>").show();
+    }
+    
+    function clearStatus(){
+        jQuery("#status").html('').hide();
+    }
+    function _sendRequest(_url, _params){
+        var _flag = false;
+        var updates = '<?php echo ($this->getRequest()->getParam("updates") == "yes")? "updates=yes&" : ''; ?>';
+        jQuery.ajax({
+            url: _url+'?'+updates+'isAjax=1&r='+Math.random(),
+            type: "POST",
+            cache: false,
+            async: false,
+            data: _params,
+            dataType: "json",
+            success: function(data){
+                if(data.redirect){ window.location = data.redirect; }
+                if(!data.updateSection){
+                    data.updateSection = 'defaultError';
+                }
+                if(data.html){
+                    jQuery('#'+data.updateSection).append(data.html).show();
+                }
+                setStatus(data.status);
+                if(data.success && data.update){
+                    $("#"+data.update.section).html(data.update.html).show();
+                }
+                loading = false;
+                data.success ? _flag = true : _flag = false;
+            },
+            error: function(msg){
+                jQuery('#defaultError').append(msg).show();
+                loading = false;
+                _flag = false;
+            }
+        });
+        return _flag;
+    }
+    
+    function downloadPackage(){
+        jQuery('#proceedToInstall').html('').hide();
+        setStatus("Package downloading...");
+        if(_sendRequest(url_downloadPackage,'')){
+            if(installPackage()){
+                return true;
+            }
+        }
+        setStatus("Package downloading failed.");
+        return false;
+    }
+    
+    function installPackage(){
+        setStatus("Installing...");
+        if(_sendRequest(url_installPackage,'')){
+            return true;
+        }
+        setStatus("Failed installation.");
+        return false;
+    }
+    
+    function reinstallPackage(key){
+        if(!key || !confirm("Do you really want to reinstall this package."))
+            return false;
+        clearStatus();
+        setStatus("Reinstalling...");
+        if(_sendRequest(url_reinstallPackage, {'key':key})){
+            return true;
+        }
+        setStatus("Reinstallation failed");
+        return false;
+    }
+    
+    function uninstallPackage(key){
+        if(!key || !confirm("Do you really want to uninstall this package."))
+            return false;
+        clearStatus();
+        setStatus("Uninstalling...");
+        if(_sendRequest(url_uninstallPackage, {'key':key})){
+            return true;
+        }
+        setStatus("Uninstallation failed");
+        return false;
+    }
+   
+    function upgradeTo(key, _from){
+        if(!key || !confirm("Do you really want to upgrade it."))
+            return false;
+        clearStatus();
+        setStatus("Upgrading...");
+        if(_sendRequest(url_upgradePackage, {'key':key})){
+            if(downloadPackage()){
+                _removeOld(_from);
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    function _removeOld(key){
+        setStatus("Finishing...");
+        if(_sendRequest(url_finishUpgrade, {'key':key})){
+            return true;
+        }
+        return false;
+    }
+</script>

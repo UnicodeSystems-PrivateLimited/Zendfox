@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Zendfox Framework
+ *
+ * LICENSE
+ *
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    Fox
+ * @package     Fox_Contact
+ * @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ */
+-->
+<settings>
+    <setting>
+        <menu name="contact" label="Contact Requests" module="contact" order="3" />
+    </setting>
+    <items>
+        <item name="contact" label="Email Settings" menu="contact" order="0">
+            <sections>               
+                <section label="Reply Configuration" name="reply" order="0">
+                    <field name="name" label="Sender Name" inputType="text" order="0" />
+                    <field name="email" label="Sender Email" inputType="text" order="1" />
+                    <field name="email_template" label="Email Template" inputType="select" order="2">
+                        <sourceModel>core/email/template</sourceModel>
+                        <default>7</default>
+                    </field>
+                </section>
+                <section label="Receiver Configuration" name="receiver" order="1">
+                    <field name="email" label="Email" inputType="text" order="0" />
+                    <field name="email_template" label="Email Template" inputType="select" order="1">
+                        <sourceModel>core/email/template</sourceModel>
+                        <default>6</default>
+                    </field>
+                </section>
+            </sections>
+        </item>
+    </items>
+</settings>

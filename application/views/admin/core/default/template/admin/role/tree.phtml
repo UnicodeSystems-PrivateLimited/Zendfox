@@ -1,0 +1,109 @@
+<?php
+/**
+ * Zendfox Framework
+ *
+ * LICENSE
+ *
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    views
+ * @package     core_default
+ * @author      Zendfox Team of Unicode Systems <zendfox@unicodesystems.in>
+ * @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ */
+/**
+ * Role resources tree view
+ *
+ * @see Fox_Admin_View_System_Role_Add_Tree
+ */
+?>
+<div class="box_container tree_container">
+    <div class="resorces_label">Resources</div>
+    <div class="groups_attr">
+        <div class="groups">
+            <div class="attribute_set">
+                <div class="box_content_container">
+                    <div class="group_content">
+                        <div class="set_tree" id="<?php echo $this->getId(); ?>"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>                            
+<input type="hidden" name="resource_ids" id="resource_ids" />
+<input type="hidden" name="custom_ids" id="custom_ids" />
+<script type="text/javascript" src="<?php echo $this->baseUrl('theme/global/js/debugger.js') ?>"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl('theme/global/js/tree/_lib/jquery.cookie.js') ?>"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl('theme/global/js/tree/_lib/jquery.hotkeys.js') ?>"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl('theme/global/js/tree/jquery.jstree.js') ?>"></script>
+<script type="text/javascript" src="<?php echo $this->themeUrl('js/form.js') ?>" ></script>
+<script type="text/javascript">
+    var roleResourceTree;
+    jQuery(document).ready(function(){        
+        foxForm=jQuery('#admin_role').foxForm({});
+        jQuery(foxForm).submit(submitRoleResourceForm);
+        jQuery('#reset').bind('click',resetRoleResourceForm);
+<?php $data = array('data' => $this->getTreeData()); ?>
+        roleResourceTree= $('#<?php echo $this->getId(); ?>').jstree({
+            "plugins" : [ "themes", "xml_data", "json_data", "ui", "types", "checkbox"],
+            "xml_data" : <?php echo json_encode($data); ?>,
+            "types" : {
+                "max_depth" : -2,
+                "max_children" : -2,
+                "valid_children" : [ "resource_category" ],
+                "valid_children" : [ "resource" ],
+                "types" : {}
+            }
+        });
+        roleResourceTree.bind('loaded.jstree',checkSelected);
+        var resId = jQuery('#resource_ids').val();
+        if(resId==-1){
+            $("#resource_access").val($("#resource_access option:last").val());
+            jQuery('.box_container').hide();
+        }
+    });
+    function checkSelected(e,data){
+        var idStr=jQuery('#resource_ids').val();
+        if(idStr != 0 && idStr != -1){
+            var ids=idStr.split(',');
+            for(var i=0;i<ids.length;i++){
+                if(jQuery('#'+ids[i]).attr('id')!=undefined){
+                    jQuery('#<?php echo $this->getId(); ?>').jstree('check_node',jQuery('#'+ids[i]));
+                }
+            }
+        }
+    }
+    function setCheckedNodeJson(){
+        var checked_ids = []; 
+        jQuery("#<?php echo $this->getId(); ?>").jstree("get_checked",null,true).each 
+        (function () { 
+            checked_ids.push(this.id);
+        }); 
+        if(checked_ids.length>0){
+            var nodes=jQuery('#<?php echo $this->getId(); ?>').jstree('get_json',jQuery('#<?php echo $this->getId(); ?>').jstree('get_checked'));
+            jQuery('#custom_ids').val(jQuery.jdebug(nodes));
+        }
+        return false;
+    }
+    function submitRoleResourceForm(){
+        setCheckedNodeJson();
+    }
+    function resetRoleResourceForm(){
+        window.location.reload();
+    }
+</script>

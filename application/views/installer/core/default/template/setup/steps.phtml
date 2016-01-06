@@ -1,0 +1,45 @@
+<?php
+/**
+ * Zendfox Framework
+ *
+ * LICENSE
+ *
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    views
+ * @package     core_default
+ * @author      Zendfox Team of Unicode Systems <zendfox@unicodesystems.in>
+* @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ */
+
+/**
+ * Installation steps
+ *
+ * @see Fox_Installer_View_Installer
+ */
+?>
+<div class="steps_right">
+    <h2>Installation</h2>
+    <ul>
+        <li class="<?php echo $this->getCurrentStep()==1?'selected':'' ?>">License Agreement</li>
+        <li class="<?php echo $this->getCurrentStep()==2?'selected':'' ?>">Localization</li>
+        <li class="<?php echo $this->getCurrentStep()==3?'selected':'' ?>">Configuration</li>
+        <li class="<?php echo $this->getCurrentStep()==4?'selected':'' ?>">Create Admin Account</li>
+        <li class="<?php echo $this->getCurrentStep()==5?'selected':'' ?>">Installation Complete</li>
+    </ul>
+    <p class="inst">For help and support, check out Zendfox's <span><a target="_blank" href="http://www.zendfox.com">Installation Guide</a></span></p>
+</div>

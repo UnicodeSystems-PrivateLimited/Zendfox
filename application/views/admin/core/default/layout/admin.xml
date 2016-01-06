@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Zendfox Framework
+ * 
+ * LICENSE
+ * 
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    views
+ * @package     core_default
+ * @author      Zendfox Team of Unicode Systems <zendfox@unicodesystems.in>
+ * @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ */
+-->
+<layout>
+    <default>
+        <container key="one-column"/>
+    </default>
+    
+    <!-- Admin login page -->
+    <index_index>
+        <container key="no-layout"></container>
+        <head>
+            <title>Login to Zendfox Admin</title>
+            <remove key="css/style.css" />
+            <link href="css/login.css" type="text/css" rel="stylesheet" />
+            <script src="theme/global/js/jquery/jquery.effects.shake.min.js" type="text/javascript" language="javascript" _global="global"/>
+            <script src="theme/global/js/form.js" type="text/javascript" language="javascript" _global="global"/>
+        </head>
+        <ref key="content">
+            <remove key="messages" />
+            <view key="login" class="admin/login" tpl="admin/login">
+                <view key="mini-footer" class="core/template" tpl="admin/index/footer" />
+            </view>
+        </ref>        
+    </index_index>
+    
+    <!-- Admin forget password page -->
+    <index_forget-password>
+        <container key="no-layout"></container>
+        <head>
+            <title>Forgot Your Password</title>
+            <remove key="css/style.css" />
+            <link href="css/login.css" type="text/css" rel="stylesheet" />
+            <script src="theme/global/js/form.js" type="text/javascript" language="javascript" _global="global"/>
+        </head>
+        <ref key="content">
+            <remove key="messages" />
+            <view key="forgetPassword" class="core/template" tpl="admin/forget-password">
+                <view key="mini-footer" class="core/template" tpl="admin/index/footer" />
+            </view>
+        </ref>        
+    </index_forget-password>
+    
+    <!-- Admin change password page redirected from email link -->
+    <index_change-password>
+        <container key="no-layout"></container>
+        <head>
+            <title>Change Password</title>
+            <remove key="css/style.css" />
+            <link href="css/login.css" type="text/css" rel="stylesheet" />
+            <script src="theme/global/js/form.js" type="text/javascript" language="javascript" _global="global"/>
+        </head>
+        <ref key="content">
+            <remove key="messages" />
+            <view key="changeForgetPassword" class="core/template" tpl="admin/change-forget-password">
+                <view key="mini-footer" class="core/template" tpl="admin/index/footer" />
+            </view>
+        </ref>        
+    </index_change-password>
+    
+    <!-- System setting edit page -->
+    <system_setting_edit>
+        <container key="two-columns-left"/>
+        <head>
+            <title type="prepend">Configuration Settings</title>
+            <link href="css/accordion.css" type="text/css" rel="stylesheet" media="screen" />
+            <script src="theme/global/js/jaccordion.js" type="text/javascript" language="javascript" _global="global"/>
+        </head>
+        <ref key="left">
+            <view key="settingMenu" class="admin/system/setting/menu" tpl="admin/system/setting/menu" />
+        </ref>
+        <ref key="content">
+            <view key="settingContent" class="admin/system/setting/content" />
+        </ref>
+    </system_setting_edit>
+    
+    <!-- Admin dashboard page -->
+    <dashboard_index>
+        <head>
+            <title type="prepend">Dashboard</title>
+        </head>
+        <ref key="content">
+            <view key="dashboard" class="admin/dashboard" tpl="admin/dashboard">
+                <view key="recent_members" class="member/admin/dashboard" tpl="member/recent_members"/>
+                <view key="recent_contacts" class="contact/admin/dashboard" tpl="contact/recent_contacts"/>
+            </view>
+        </ref>
+    </dashboard_index>
+    
+    <!-- Admin access denied page -->
+    <access-denied_index>
+        <head>
+            <title type="prepend">Access Denied</title>
+        </head>
+        <ref key="content">
+            <view key="access" class="core/template" tpl="admin/access-denied"/>
+        </ref>
+    </access-denied_index>
+</layout>

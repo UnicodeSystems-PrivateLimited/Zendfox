@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Zendfox Framework
+ *
+ * LICENSE
+ *
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    views
+ * @package     core_default
+ * @author      Zendfox Team of Unicode Systems <zendfox@unicodesystems.in>
+ * @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ */
+-->
+<layout>
+    <default>
+        <container key="two-columns-left" />
+    </default>
+    
+    <!-- Create account page -->
+    <account_create>
+        <container key="one-column" />
+        <head>
+            <title>Create New Account</title>
+            <link href="css/ui/jquery.ui.datepicker.css" type="text/css" rel="stylesheet" />
+            <link href="css/ui/jquery.ui.core.css" type="text/css" rel="stylesheet" />
+            <link href="css/ui/jquery.ui.theme.css" type="text/css" rel="stylesheet" />
+            <script src="theme/global/js/jquery/jquery.ui.datepicker.min.js" type="text/javascript" language="javascript" _global="global"/>
+            <script src="theme/global/js/jquery/jquery.ui.core.min.js" type="text/javascript" language="javascript" _global="global"/>
+        </head>
+        <ref key="content">
+            <view key="member_register" class="member/register" tpl="member/register">
+                <view key="member_register_form" class="member/register/form" tpl="member/register/form" />
+            </view>
+        </ref>
+    </account_create>
+        <!-- Member profile page -->
+    <account_profile>
+        <head>
+            <title>My Profile</title>
+        </head>
+        <ref key="left">
+            <view key="profileImage" class="member/member" tpl="member/account/profile/image" />
+            <view key="leftMenuContainer" class="member/navigation/link" tpl="member/navigation/links">
+                <view key="leftMenu" class="navigation/menu" tpl="navigation/leftMenu" />
+            </view>
+        </ref>
+        <ref key="content">
+            <view key="profile" class="member/account/profile" tpl="member/account/profile" />
+        </ref>
+    </account_profile>
+    
+    <!-- Member edit profile page -->
+    <account_edit-profile>
+        <head>
+            <title>Edit Profile</title>
+        </head>
+        <head>
+            <link href="css/ui/jquery.ui.datepicker.css" type="text/css" rel="stylesheet" />
+            <link href="css/ui/jquery.ui.core.css" type="text/css" rel="stylesheet" />
+            <link href="css/ui/jquery.ui.theme.css" type="text/css" rel="stylesheet" />
+            <script src="theme/global/js/jquery/jquery.ui.datepicker.min.js" type="text/javascript" language="javascript" _global="global"/>
+            <script src="theme/global/js/jquery/jquery.ui.core.min.js" type="text/javascript" language="javascript" _global="global"/>
+        </head>
+        <ref key="left">
+            <view key="profileImage" class="member/member" tpl="member/account/profile/image" />
+            <view key="memberleftmenu" class="member/navigation/link" tpl="member/navigation/links">
+                <view key="leftMenu" class="navigation/menu" tpl="navigation/leftMenu" />
+            </view>
+        </ref>
+        <ref key="content">
+            <view key="edit_profile" class="member/account/profile" tpl="member/account/edit-profile">
+                <view key="edit_profile_form" class="member/account/form" tpl="member/account/edit/form" />
+            </view>
+        </ref>
+    </account_edit-profile>
+
+    <!-- Member login page -->
+    <account_login>
+        <container key="one-column" />
+        <head>
+            <title>Member Login</title>
+        </head>
+        <ref key="content">
+            <view key="member_login" class="member/login" tpl="member/login" />
+        </ref>
+    </account_login>
+
+     <!-- Member change password page -->
+    <account_change-password>
+        <head>
+            <title>Change Password</title>
+        </head>
+        <ref key="left">
+            <view key="profileImage" class="member/member" tpl="member/account/profile/image" />
+            <view key="memberleftmenu" class="member/navigation/link" tpl="member/navigation/links">
+                <view key="leftMenu" class="navigation/menu" tpl="navigation/leftMenu" />
+            </view>
+        </ref>
+        <ref key="content">
+            <view key="change_password" class="member/account/profile" tpl="member/account/change-password" />
+        </ref>
+    </account_change-password>
+
+     <!-- Member edit profile image page -->
+    <account_edit-image>
+        <head>
+            <title>Change Profile Image</title>
+        </head>
+        <ref key="left">
+            <view key="profileImage" class="member/member" tpl="member/account/profile/image" />
+            <view key="memberleftmenu" class="member/navigation/link" tpl="member/navigation/links">
+                <view key="leftMenu" class="navigation/menu" tpl="navigation/leftMenu" />
+            </view>
+        </ref>
+        <ref key="content">
+            <view key="edit-image" class="member/account/profile" tpl="member/account/edit-image" />
+        </ref>
+    </account_edit-image>
+
+      <!-- Member forgot password page -->
+    <account_forgot-password>
+        <container key="one-column" />
+        <head>
+            <title>Forgot Password</title>
+        </head>
+        <ref key="content">
+            <view key="member_forgot_password" class="core/template" tpl="member/account/forgot-password" />
+        </ref>
+    </account_forgot-password>
+
+    <!-- Member change password page redirected from forgot password email -->
+    <password_change-password>
+        <container key="one-column" />
+        <head>
+            <title>Change Password</title>
+        </head>
+        <ref key="content">
+            <view key="member_change_password" class="core/template" tpl="member/account/change-forgot-password" />
+        </ref>
+    </password_change-password>    
+</layout>

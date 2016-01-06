@@ -1,0 +1,49 @@
+<?php
+/**
+ * Zendfox Framework
+ *
+ * LICENSE
+ *
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    views
+ * @package     core_default
+ * @author      Zendfox Team of Unicode Systems <zendfox@unicodesystems.in>
+ * @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ */
+
+/**
+ * Edit attribute set page container
+ *
+ * @see Fox_Eav_View_Admin_Set_Edit
+ */
+?>
+<div id="<?php echo $this->getId(); ?>">
+    <div class="admin_page_title"><table width="100%" cellpadding="0" cellspacing="0"><tr><td><h1><?php echo $this->getHeaderText(); ?></h1></td>
+                <td align="right">
+                    <button class="button form-button" onclick="history.back()"><span><?php echo $this->getBackButtonText(); ?></span><span class="back"></span></button>
+                    <button class="button form-button1" onclick="reloadSet()"><span><?php echo $this->getResetButtonText(); ?></span><span class="reset"></span><span class="reset"></span></button>
+                    <?php if ($this->isEditing()): ?><button class="button form-button2" onclick="deleteAttributeSet('<?php echo $this->getDeleteButtonUrl() ?>')"><span><?php echo $this->getDeleteButtonText(); ?></span><span class="del"></span></button><?php endif; ?>
+                        <button class="button form-button" onclick="submitAttributeSetForm(false);"><span><?php echo $this->getSaveButtonText(); ?></span><span class="save"></span></button>
+                        <button class="button form-button" onclick="submitAttributeSetForm(true);"><span><?php echo $this->getSaveAndEditButtonText(); ?></span><span class="save"></span></button>
+                    </td></tr></table></div>
+        <div class="table_title_header">
+            <div class="heading_bg">
+                <div class="table_title_header_left"><h1>Edit Attribute Set</h1></div></div>
+        </div>
+        <?php echo $this->getContent('__form__');?>
+</div>    

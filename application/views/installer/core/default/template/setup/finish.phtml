@@ -1,0 +1,44 @@
+<?php
+/**
+ * Zendfox Framework
+ *
+ * LICENSE
+ *
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    views
+ * @package     core_default
+ * @author      Zendfox Team of Unicode Systems <zendfox@unicodesystems.in>
+ * @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ */
+
+/**
+ * Installation success
+ *
+ * @see Fox_Installer_View_Installer
+ */
+?>
+<div class="steps_left_cont local_main">
+    <h2>Installation Complete</h2>
+    <div class="local_in succ">
+        Zendfox is successfully installed on your server. You are all set to experience a Web Application Framework based on Zend framework.
+    </div>
+    <div class="btn_div">
+        <button class="button" onclick="window.open('<?php echo Fox::getSiteUrl() ?>')" type="button" name="frontend" value="frontend" id="frontend"><span><span>Go to Frontend</span></span></button>
+        <button class="button" onclick="window.open('<?php echo Fox::getAdminUrl() ?>')" type="button" name="backend" value="backend" id="backend"><span><span>Go to Backend</span></span></button>
+    </div>
+</div>

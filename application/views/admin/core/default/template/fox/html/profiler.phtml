@@ -1,0 +1,81 @@
+<?php
+/**
+ * Zendfox Framework
+ *
+ * LICENSE
+ *
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    views
+ * @package     core_default
+ * @author      Zendfox Team of Unicode Systems <zendfox@unicodesystems.in>
+ * @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ *
+
+/**
+ * Admin profiler block
+ *
+ * @see Fox_Core_View_Html_Profiler
+ */
+?>
+<?php
+if ($this->isProfilerEnabled()):
+    $profiler = $this->getProfiler();
+    $totalTime = $profiler->getTotalElapsedSecs();
+    $queryCount = $profiler->getTotalNumQueries();
+    ?>
+    <style type="text/css">
+        .dbug-container{border:5px outset #EFEFEF; padding:5px;}
+        .dbug-header{border:1px solid #CCCCCC;}
+        .dbug-header span{padding:0 5px;}
+        .dbug-title{font-weight:bold;}
+        .dbug-val{color:#00CC00;}
+        .dbug-table{background-color:#CCCCCC;}
+        .dbug-table td{background-color:#EFEFEF; padding:2px;}
+        .dbug-table thead td{font-weight:bold; text-align:center; background-color:#DDDDDD;}
+        .dbug-table tbody td{text-align:left;}
+        .dbug-table td.dbug-time{color:#0000AA; background-color:#DDDDDD;}
+    </style>
+    <div class="dbug-container">
+        <div class="dbug-header"><span class="dbug-title" style="background-color:#DDDDDD;">Database Debug Info:</span><span class="dbug-title">Total Time(Sec.):</span><span class="dbug-val"><?php echo $totalTime; ?></span><span class="dbug-title">Total Queries:</span><span class="dbug-val"><?php echo $queryCount; ?></span></div>
+        <table class="dbug-table" width="100%" border="0" cellspacing="1" cellpadding="0">
+            <thead>
+                <tr>
+                    <td width="11%" align="center">Time Elapsed(Sec.)</td>
+                    <td width="80%" align="center">Query</td>
+                    <td width="9%" align="center">Parameters</td>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $profiles = $profiler->getQueryProfiles();
+                if ($profiles):
+                    foreach ($profiles as $query):
+                        $params = $query->getQueryParams();
+                        ?>
+                        <tr>
+                            <td class="dbug-time"><?php echo $query->getElapsedSecs(); ?></td>
+                            <td><?php echo $query->getQuery(); ?></td>
+                            <td><?php echo (empty($params) ? '' : print_r($params, TRUE)); ?></td></tr>
+                        <?php
+                    endforeach;
+                endif;
+                ?>
+            </tbody>
+        </table>
+    </div>
+<?php endif; ?>

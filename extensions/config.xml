@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Zendfox Framework
+ *
+ * LICENSE
+ *
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    Fox
+ * @package     Fox_Extentionmanager
+ * @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ */
+-->
+<configdata>
+    <managerdata>
+        <host>www.zendfox.com</host>
+        <secure>false</secure>
+        <hashkey>kjs8798732ljkhgieoij098pofwqnfhr</hashkey>
+        <extensionmanager>
+            <dir_name>extensionmanager</dir_name>
+            <compressed_dir>compressed</compressed_dir>
+            <generated_dir>gen</generated_dir>
+            <cache>cache</cache>
+            <cache_file>site.xml</cache_file>
+        </extensionmanager>
+        <downloader>
+            <dir_name>downloader</dir_name>
+            <compressed_dir>compressed</compressed_dir>
+            <downloaded_dir>downloaded</downloaded_dir>
+            <installed_dir>installed</installed_dir>
+            <updates_url>http://www.zendfox.com/packagestore/channel/updates</updates_url>
+            <install_channel_action>package</install_channel_action>
+        </downloader>
+        <package_file>extension.xml</package_file>
+        <fox_market>http://www.zendfox.com/packagestore/channel/</fox_market>
+        <fox_market_store>http://www.zendfox.com</fox_market_store>
+    </managerdata>
+</configdata>

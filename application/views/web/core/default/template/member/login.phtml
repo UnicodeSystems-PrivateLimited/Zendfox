@@ -1,0 +1,64 @@
+<?php
+/**
+ * Zendfox Framework
+ *
+ * LICENSE
+ *
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    views
+ * @package     core_default
+ * @author      Zendfox Team of Unicode Systems <zendfox@unicodesystems.in>
+ * @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ */
+
+/**
+ * Member login page
+ *
+ * @see Fox_Member_View_Login
+ */
+?>
+<div class="content_login">
+    <div class="login_left">
+        <h2 align="center"><span><?php echo $this->_('Member Login');?></span></h2>
+    </div>
+    <div class="login_right">
+        <form action="<?php echo $this->getLoginUrl(); ?>" method="post" name="member-login" id="member-login">
+            <div class="login_form_div">
+                <ul>
+                    <li>
+                        <span class="text"><?php echo $this->_('Email');?><span class="asterisk">*</span></span>
+                        <span class="text_fd"><input name="email_id" type="text" class="txt_bg required email" /></span>
+                    </li>
+                    <li>
+                        <span class="text"><?php echo $this->_('Password');?><span class="asterisk">*</span></span>
+                        <span class="text_fd"><input name="password" type="password" class="txt_bg required" /></span>
+                    </li>
+                    <li>
+                        <span class="submit_btn"><input name="" type="image" src="<?php echo $this->themeUrl('images/login/login.jpg'); ?>" /></span>
+                        <span class="submit_text"><a href="<?php echo Fox::getHelper('member/data')->getForgetPasswordUrl(); ?>"><?php echo $this->_('Forgot Password?');?></a></span>
+                    </li>
+                </ul>
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        foxForm=jQuery('#member-login').foxForm({});
+    });
+</script>

@@ -1,0 +1,56 @@
+<?php
+/**
+ * Zendfox Framework
+ *
+ * LICENSE
+ *
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    views
+ * @package     core_default
+ * @author      Zendfox Team of Unicode Systems <zendfox@unicodesystems.in>
+ * @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ */
+
+/**
+ * Member profile page
+ *
+ * @see Fox_Member_View_Account_Profile
+ */
+?>
+<div class="memProfile">
+<h3><?php echo $this->_('My Profile');?></h3>
+<div class="pro_wapper">
+    <?php
+    $memberData = Fox::getModel('member/session')->getLoginData();
+    if ($memberData):
+        ?>
+        <div class="pro_wrap">
+            <span class="lebal_sp_pro"><?php echo $this->_('First Name');?></span><span class="pro_dot">:</span><span class="data_sp_pro"><?php echo $memberData->getFirstName(); ?></span>
+        </div>
+        <div class="pro_wrap">
+            <span class="lebal_sp_pro"><?php echo $this->_('Last Name');?></span><span class="pro_dot">:</span><span class="data_sp_pro"><?php echo $memberData->getLastName(); ?></span>
+        </div>
+        <div class="pro_wrap">
+            <span class="lebal_sp_pro"><?php echo $this->_('Email');?> </span><span class="pro_dot">:</span><span class="data_sp_pro"><?php echo $memberData->getEmailId(); ?></span>
+        </div>
+        <div class="pro_wrap">
+            <span class="lebal_sp_pro"><?php echo $this->_('Registration Date');?></span><span class="pro_dot">:</span><span class="data_sp_pro"><?php echo Fox_Core_Model_Date::__toLocaleDate(strtotime($memberData->getJoinDate())); ?></span><br/>
+        </div>
+<?php endif; ?>    
+</div>
+</div>

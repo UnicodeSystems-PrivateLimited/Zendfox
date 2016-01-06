@@ -1,0 +1,62 @@
+<?php
+/**
+ * Zendfox Framework
+ *
+ * LICENSE
+ *
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    views
+ * @package     core_default
+ * @author      Zendfox Team of Unicode Systems <zendfox@unicodesystems.in>
+ * @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ */
+
+/**
+ * Admin login page
+ *
+ * @see Fox_Admin_View_Login
+ */
+?>
+<div class="login_main_container">
+    <div class="login_main">
+        <div class="login_header">
+            <h1>Administrator</h1>
+        </div>
+        <div class="login_container">
+            <div class="container_in" id="login-page">
+                <div class="msgbox"><?php echo Fox::getHelper('core/message')->getAllMessagesHtml(); ?></div>
+                <form action="" method="post" name="admin-form-login" id="admin-form-login">
+                    <div class="login_field_div"><div class="login_text"> Username </div><div class="login_input"><input type="text" id="username" name="username" class="required"/></div></div>
+                    <div class="login_field_div"><div class="login_text">Password </div><div class="login_input"><input type="password" id="password" name="password" class="required"/></div></div>
+                    <div class="login_field_div"><div class="login_button"><button type="submit" class="button form-button-login"><span>Submit</span></button></div><div class="for_text"><a href="<?php echo Fox::getUrl('admin/index/forget-password'); ?>">Forgot Your Password?</a></div></div>
+                </form>
+            </div>
+        </div>
+        <?php echo $this->getContent('mini-footer'); ?>
+    </div>
+</div>
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        var loginErr='<?php echo $this->getLoginError(); ?>';
+        if(loginErr){
+<?php $this->clearLoginError(); ?>
+            jQuery('#login-page').effect('shake',{},50);
+        }
+        foxForm=jQuery('#admin-form-login').foxForm({});
+    });
+</script>

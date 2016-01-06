@@ -1,0 +1,136 @@
+<?php
+/**
+ * Zendfox Framework
+ *
+ * LICENSE
+ *
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    views
+ * @package     core_default
+ * @author      Zendfox Team of Unicode Systems <zendfox@unicodesystems.in>
+ * @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ */
+/**
+ * Extensionmanager Package Contents view
+ *
+ * @see Fox_Extensionmanager_View_Admin_Generate_Add_Contents
+ */
+?>
+<script type="text/javascript" src="<?php echo $this->baseUrl('theme/global/js/tree/_lib/jquery.cookie.js') ?>"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl('theme/global/js/tree/_lib/jquery.hotkeys.js') ?>"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl('theme/global/js/tree/jquery.jstree.js') ?>"></script>
+<div class="box_container">
+    <div id="content-tree"></div>
+    <div class="action">
+        <button type="button" class="button form-button" onclick="return loadTree('<?php echo $this->getUrl("*/*/tree-data",array("cache"=>"no"))?>')"><span>Refresh</span></button>
+    </div>
+    <p class="description">Refresh Tree Cache</p>
+</div>
+<?php $treeSelected = $this->getSelectedTreeNodes(); ?>
+<input id="treeOutput" type="hidden" name="content_tree_data" value=""/>
+
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        foxForm=jQuery('#extension_generator').foxForm({});
+        jQuery(foxForm).submit(function(){
+            setCheckedNodeJson();
+        });
+        loadTree('<?php echo $this->getUrl("*/*/tree-data") ?>');
+    });
+    
+    function loadTree(_url){
+        jQuery.ajax({
+            url: _url,
+            type: "POST",
+            cache: false,
+            dataType: "json",
+            success: function(data){
+                if(data.success && data.content){
+                    if(data.redirect){ window.location = data.redirect; }
+                    jQuery("#content-tree").jstree({
+                        "plugins" : [ "themes", "xml_data", "json_data", "ui", "types", "checkbox"],
+                        "xml_data" : {
+                            "data" : data.content,
+                            "xsl"  : 'nest'
+                        },
+                        "types" : {
+                            "max_depth" : -2,
+                            "max_children" : -2,
+                            "valid_children" : [ "drive" ],
+                            "types" : {
+                                "max_depth" : -2,
+                                "max_children" : -2,
+                                "valid_children" : [ "dir" ],
+                                "valid_children" : [ "file" ],
+                                'file' : {
+                                    'icon' : {
+                                        'image' : ''
+                                    }
+                                },
+                                'dir' : { }
+                            }
+                        },
+                        callback :{
+                            onselect : function(){
+                            }
+                        }
+                    });
+                    checkSelected();
+                }else{
+                    jQuery('#content-tree').html("Error while loading directory tree.");
+                }
+            },
+            error: function(msg){
+                jQuery('#content-tree').html("Error while loading tree : "+msg);
+            }
+        });
+    }
+    
+    function checkSelected(){
+    var idStr = '<?php echo str_replace("\\","\\\\\\\\",implode(",", $treeSelected)) ?>';
+        var ids = idStr.split(',');
+        for(var i = 0; i < ids.length && ids[i] ; i++ ){
+            if(jQuery("[path='"+ids[i]+"']")!=undefined){
+                jQuery('#content-tree').jstree('check_node',jQuery('[path="'+ids[i]+'"]'));
+                var path = ids[i];
+                while(path != ''){
+                    if(jQuery('[path="'+path+'"]')!=undefined){
+                        jQuery('#content-tree').jstree('open_node',jQuery('[path="'+path+'"]'));
+                    }
+                    <?php if(DS != "/"){ ?>
+                        path = path.substr(0, path.lastIndexOf("\\"));
+                    <?php }else{ ?>
+                        path = path.substr(0, path.lastIndexOf("<?php echo DS?>"));
+                    <?php } ?>
+                }
+            }
+        }
+    }
+    
+    function setCheckedNodeJson(){
+        var checked_ids = [];
+        jQuery("#content-tree").jstree("get_checked",null,true).each (function () {
+            checked_ids.push(this.id);
+        });
+        if(checked_ids.length>0){
+            var nodes=jQuery('#content-tree').jstree('get_xml', 'nest', jQuery('#content-tree').jstree('get_checked'),["path","rel"]);
+            jQuery('#treeOutput').val(nodes);
+        }
+        return false;
+    }
+</script>

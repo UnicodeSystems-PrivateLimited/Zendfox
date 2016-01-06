@@ -1,0 +1,402 @@
+<?php
+/**
+ * Zendfox Framework
+ *
+ * LICENSE
+ *
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    views
+ * @package     core_default
+ * @author      Zendfox Team of Unicode Systems <zendfox@unicodesystems.in>
+ * @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ */
+
+/**
+ * Add|Edit attribute page
+ *
+ * @see Fox_Eav_View_Admin_Attribute_Add_Form
+ */
+?>
+<?php
+$attributeModel = $this->getAttribute();
+$options = $this->getAttributeOptions();
+$optionCount = 0;
+?>
+
+<div class="tab_cont"><ul class="tabs">
+        <li title="Attribute Properties" class="tab first selected"><span class="title">Attribute Properties</span></li>
+        <li title="Manage Label / Options" class="tab last"><span class="title">Manage Label / Options</span></li>
+    </ul></div>
+<div class="form_cont">
+    <form id="<?php echo $this->getId() ?>" method="post" name="<?php echo $this->getId() ?>" action="<?php echo $this->getSubmitUrl() ?>">
+            <div class="tab_cont_bg_top">
+                <div class="tab_cont_bg_bottom">
+                    <div class="tab_cont_bg_left">
+                        <div class="tab_cont_bg_right">
+                            <div class="tab_cont_bg_top_left">
+                                <div class="tab_cont_bg_bottom_left">
+                                    <div class="tab_cont_bg_top_right">
+                                        <div class="tab_cont_bg_bottom_right">
+                                            <div class="tab_cont_bg">
+                                                <div class="tab_content_container">
+                                                    <div class="tab" id="subform1" style="display: block;"><h2>Attribute Properties</h2>
+                                                            <table cellspacing="5" cellpadding="0" border="0" align="left">
+                                                                <tbody>
+                                                                <input type="hidden" id="id" value="<?php echo $attributeModel->getId() ?>" name="id" />
+                                                                <input type="hidden" name="option_delete" value="0" id="option_delete" />
+                                                                <input type="hidden" name="option_delete_ids" value="0" id="option_delete_ids" />
+                                                                <input type="hidden" id="is_user_defined" value="<?php echo $attributeModel->getIsUserDefined() ?>" name="is_user_defined" />
+                                                                <tr class="row">
+                                                                    <td class="label"><label for="url_key">Attribute Code*</label></td>
+                                                                    <td class="ele">
+                                                                        <?php if (!$attributeModel->getId()): ?>
+                                                                            <input type="text" class="required no-space" maxlength="200" size="30" value="<?php echo $attributeModel->getAttributeCode() ?>" id="attribute_code" name="attr[attribute_code]">
+                                                                        <?php else: ?>
+                                                                                <label><?php echo $attributeModel->getAttributeCode() ?></label>
+                                                                        <?php endif; ?>
+                                                                                <div class="description">For internal use. Must be unique with no spaces</div></td>
+                                                                        </tr>
+                                                                        <tr class="row">
+                                                                            <td class="label"><label for="input_type">Input Type</label></td>
+                                                                            <td class="ele">
+                                                                                <select<?php echo ($attributeModel->getId()) ? ' disabled="disabled"' : '' ?> class="required" name="attr[input_type]" id="input_type">
+                                                                                    <option<?php echo ($attributeModel->getInputType() == Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_TEXTFIELD) ? ' selected="selected"' : '' ?> value="<?php echo Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_TEXTFIELD ?>">Text Field</option>
+                                                                                    <option<?php echo ($attributeModel->getInputType() == Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_TEXTAREA) ? ' selected="selected"' : '' ?> value="<?php echo Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_TEXTAREA ?>">Text Area</option>
+                                                                                    <option<?php echo ($attributeModel->getInputType() == Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_DATE) ? ' selected="selected"' : '' ?> value="<?php echo Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_DATE ?>">Date</option>
+                                                                                    <option<?php echo ($attributeModel->getInputType() == Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_BOOLEAN) ? ' selected="selected"' : '' ?> value="<?php echo Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_BOOLEAN ?>">Yes/NO</option>
+                                                                                    <option<?php echo ($attributeModel->getInputType() == Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_RADIO) ? ' selected="selected"' : '' ?> value="<?php echo Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_RADIO ?>">Radio</option>
+                                                                                    <option<?php echo ($attributeModel->getInputType() == Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_SELECT) ? ' selected="selected"' : '' ?> value="<?php echo Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_SELECT ?>">Dropdown</option>
+                                                                                    <option<?php echo ($attributeModel->getInputType() == Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_MULTISELECT) ? ' selected="selected"' : '' ?> value="<?php echo Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_MULTISELECT ?>">Multiple Select</option>
+                                                                                    <option<?php echo ($attributeModel->getInputType() == Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_PRICE) ? ' selected="selected"' : '' ?> value="<?php echo Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_PRICE ?>">Price</option>
+                                                                                    <option<?php echo ($attributeModel->getInputType() == Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_FILE) ? ' selected="selected"' : '' ?> value="<?php echo Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_FILE ?>">File</option>
+                                                                                </select>
+                                                                                <div class="description"></div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr<?php echo (($attributeModel->getInputType() == Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_RADIO) || ($attributeModel->getInputType() == Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_SELECT) || ($attributeModel->getInputType() == Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_MULTISELECT)) ? ' style="display:none;"' : '' ?> id="default_value_cont" class="row">
+                                                                            <td class="label"><label>Default Value</label></td>
+                                                                            <td class="ele">
+                                                                                <input<?php echo ((!$attributeModel->getInputType()) || ($attributeModel->getInputType() == Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_TEXTFIELD) || ($attributeModel->getInputType() == Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_DATE) || ($attributeModel->getInputType() == Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_PRICE) || ($attributeModel->getInputType() == Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_FILE)) ? '' : ' style="display:none;"' ?> name="attr[default_value_textfield]" id="default_value_textfield" type="text" value="<?php echo (($attributeModel->getInputType() == Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_TEXTFIELD) || ($attributeModel->getInputType() == Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_DATE) || ($attributeModel->getInputType() == Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_PRICE)) ? $attributeModel->getDefaultValue() : '' ?>" />
+                                                                                <span id="default_value_date_cont"<?php echo $attributeModel->getInputType() == Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_DATE ? '' : ' style="display:none;"'; ?>><?php echo $this->formDate('attr[default_value_date]', $attributeModel->getDefaultValue(), array('options' => array('dateFormat' => 'yy-mm-dd'))); ?></span>
+                                                                                <textarea style="<?php echo ($attributeModel->getInputType() == Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_TEXTAREA) ? '' : 'display: none;' ?>" name="attr[default_value_textarea]" id="default_value_textarea" cols="30" rows="5"><?php echo ($attributeModel->getInputType() == Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_TEXTAREA) ? $attributeModel->getDefaultValue() : '' ?></textarea>
+                                                                                <select style="<?php echo ($attributeModel->getInputType() == Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_BOOLEAN) ? '' : 'display: none;' ?>" name="attr[default_value_boolean]" id="default_value_boolean">
+                                                                                    <option<?php echo ($attributeModel->getInputType() == Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_BOOLEAN && $attributeModel->getDefaultValue() == 0) ? ' selected="selected"' : '' ?> value="0">No</option>
+                                                                                    <option<?php echo ($attributeModel->getInputType() == Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_BOOLEAN && $attributeModel->getDefaultValue() == 1) ? ' selected="selected"' : '' ?> value="1">Yes</option>
+                                                                                </select>
+                                                                                <div class="description"></div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr id="is_unique_cont"<?php echo ($attributeModel->getInputType() == Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_FILE) ? ' style="display:none;"' : '' ?> class="row">
+                                                                            <td class="label"><label for="is_unique">Unique Value</label></td>
+                                                                            <td class="ele">
+                                                                                <select name="attr[is_unique]" id="is_unique">
+                                                                                    <option<?php echo ($attributeModel->getIsUnique() == Fox_Eav_Model_Attribute::ATTRIBUTE_UNIQUE_NO) ? ' selected="selected"' : '' ?> value="<?php echo Fox_Eav_Model_Attribute::ATTRIBUTE_UNIQUE_NO ?>">No</option>
+                                                                                    <option<?php echo ($attributeModel->getIsUnique() == Fox_Eav_Model_Attribute::ATTRIBUTE_UNIQUE_YES) ? ' selected="selected"' : '' ?> value="<?php echo Fox_Eav_Model_Attribute::ATTRIBUTE_UNIQUE_YES ?>">Yes</option>
+                                                                                </select>
+                                                                                <div class="description">Not shared with others</div></td>
+                                                                        </tr>
+                                                                        <tr class="row">
+                                                                            <td class="label"><label for="is_required">Values Required</label></td>
+                                                                            <td class="ele">
+                                                                                <select name="attr[is_required]" id="is_required">
+                                                                                    <option<?php echo ($attributeModel->getIsRequired() == Fox_Eav_Model_Attribute::ATTRIBUTE_REQUIRED_NO) ? ' selected="selected"' : '' ?> value="<?php echo Fox_Eav_Model_Attribute::ATTRIBUTE_REQUIRED_NO ?>">No</option>
+                                                                                    <option<?php echo ($attributeModel->getIsRequired() == Fox_Eav_Model_Attribute::ATTRIBUTE_REQUIRED_YES) ? ' selected="selected"' : '' ?> value="<?php echo Fox_Eav_Model_Attribute::ATTRIBUTE_REQUIRED_YES ?>">Yes</option>
+                                                                                </select>
+                                                                                <div class="description"></div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr class="row">
+                                                                            <td class="label"><label for="is_editable">Editable</label></td>
+                                                                            <td class="ele">
+                                                                                <select name="attr[is_editable]" id="is_editable">
+                                                                                    <option<?php echo ($attributeModel->getIsEditable() == Fox_Eav_Model_Attribute::ATTRIBUTE_EDITABLE_NO) ? ' selected="selected"' : '' ?> value="<?php echo Fox_Eav_Model_Attribute::ATTRIBUTE_EDITABLE_NO ?>">No</option>
+                                                                                    <option<?php echo ($attributeModel->getIsEditable() == Fox_Eav_Model_Attribute::ATTRIBUTE_EDITABLE_YES) ? ' selected="selected"' : '' ?> value="<?php echo Fox_Eav_Model_Attribute::ATTRIBUTE_EDITABLE_YES ?>">Yes</option>
+                                                                                </select>
+                                                                                <div class="description"></div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr class="row">
+                                                                            <td class="label"><label for="is_backend_editable">Backend Editable</label></td>
+                                                                            <td class="ele">
+                                                                                <select name="attr[is_backend_editable]" id="is_backend_editable">
+                                                                                    <option<?php echo ($attributeModel->getIsBackendEditable() == Fox_Eav_Model_Attribute::ATTRIBUTE_EDITABLE_BACKEND_NO) ? ' selected="selected"' : '' ?> value="<?php echo Fox_Eav_Model_Attribute::ATTRIBUTE_EDITABLE_BACKEND_NO ?>">No</option>
+                                                                                    <option<?php echo ($attributeModel->getIsBackendEditable() == '' || $attributeModel->getIsBackendEditable() == Fox_Eav_Model_Attribute::ATTRIBUTE_EDITABLE_BACKEND_YES) ? ' selected="selected"' : '' ?> value="<?php echo Fox_Eav_Model_Attribute::ATTRIBUTE_EDITABLE_BACKEND_YES ?>">Yes</option>
+                                                                                </select>
+                                                                                <div class="description"></div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr class="row">
+                                                                            <td class="label"><label for="is_visibile_on_frontend">Visible On Frontend</label></td>
+                                                                            <td class="ele">
+                                                                                <select name="attr[is_visible_on_frontend]" id="is_visible_on_frontend">
+                                                                                    <option<?php echo ($attributeModel->getIsVisibleOnFrontend() == Fox_Eav_Model_Attribute::ATTRIBUTE_VISIBILE_ON_FRONTEND_NO) ? ' selected="selected"' : '' ?> value="<?php echo Fox_Eav_Model_Attribute::ATTRIBUTE_VISIBILE_ON_FRONTEND_NO ?>">No</option>
+                                                                                    <option<?php echo ($attributeModel->getIsVisibleOnFrontend() == '' || $attributeModel->getIsVisibleOnFrontend() == Fox_Eav_Model_Attribute::ATTRIBUTE_VISIBILE_ON_FRONTEND_YES) ? ' selected="selected"' : '' ?> value="<?php echo Fox_Eav_Model_Attribute::ATTRIBUTE_VISIBILE_ON_FRONTEND_YES ?>">Yes</option>
+                                                                                </select>
+                                                                                <div class="description"></div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr<?php echo ($attributeModel->getInputType() == Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_TEXTFIELD || $attributeModel->getInputType() == Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_FILE) ? '' : ' style="display:none;"' ?> id="validation_cont" class="row">
+                                                                            <td class="label"><label>Input Validation</label></td>
+                                                                            <td class="ele">
+                                                                                <select<?php echo ($attributeModel->getInputType() == Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_FILE) ? ' style="display:none;"' : '' ?> name="attr[validation_others]" id="validation_others">
+                                                                                    <option<?php echo ($attributeModel->getValidation() == '') ? ' selected="selected"' : '' ?> value="">None</option>
+                                                                                    <option<?php echo ($attributeModel->getValidation() == Fox_Eav_Model_Attribute::ATTRIBUTE_VALIDATION_DECIMAL) ? ' selected="selected"' : '' ?> value="<?php echo Fox_Eav_Model_Attribute::ATTRIBUTE_VALIDATION_DECIMAL ?>">Decimal Number</option>
+                                                                                    <option<?php echo ($attributeModel->getValidation() == Fox_Eav_Model_Attribute::ATTRIBUTE_VALIDATION_INT) ? ' selected="selected"' : '' ?> value="<?php echo Fox_Eav_Model_Attribute::ATTRIBUTE_VALIDATION_INT ?>">Integer</option>
+                                                                                    <option<?php echo ($attributeModel->getValidation() == Fox_Eav_Model_Attribute::ATTRIBUTE_VALIDATION_EMAIL) ? ' selected="selected"' : '' ?> value="<?php echo Fox_Eav_Model_Attribute::ATTRIBUTE_VALIDATION_EMAIL ?>">Email</option>
+                                                                                    <option<?php echo ($attributeModel->getValidation() == Fox_Eav_Model_Attribute::ATTRIBUTE_VALIDATION_URL) ? ' selected="selected"' : '' ?> value="<?php echo Fox_Eav_Model_Attribute::ATTRIBUTE_VALIDATION_URL ?>">URL</option>
+                                                                                    <option<?php echo ($attributeModel->getValidation() == Fox_Eav_Model_Attribute::ATTRIBUTE_VALIDATION_LETTERS) ? ' selected="selected"' : '' ?> value="<?php echo Fox_Eav_Model_Attribute::ATTRIBUTE_VALIDATION_LETTERS ?>">Alphanumeric</option>
+                                                                                </select>
+                                                                                <select<?php echo ($attributeModel->getInputType() == Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_FILE) ? '' : ' style="display:none;"' ?> name="attr[validation_image]" id="validation_image">
+                                                                                    <option<?php echo ($attributeModel->getValidation() == '') ? ' selected="selected"' : '' ?> value="">None</option>
+                                                                                    <option<?php echo ($attributeModel->getValidation() == Fox_Eav_Model_Attribute::ATTRIBUTE_VALIDATION_IMAGE) ? ' selected="selected"' : '' ?> value="<?php echo Fox_Eav_Model_Attribute::ATTRIBUTE_VALIDATION_IMAGE ?>">Image</option>
+                                                                                </select>
+                                                                                <div class="description"></div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr class="row">
+                                                                            <td class="label"><label for="position">Position</label></td>
+                                                                            <td class="ele"><input type="text" maxlength="200" size="30" value="<?php echo ($attributeModel->getPosition()) ? $attributeModel->getPosition() : '' ?>" id="position" name="attr[position]" />
+                                                                                <div class="description"></div></td>
+                                                                        </tr>
+                                                                        <tr class="row">
+                                                                            <td class="label"><label for="entity_type_id">Apply To</label></td>
+                                                                            <td class="ele">
+                                                                                <select<?php echo ($attributeModel->getId()) ? ' disabled="disabled"' : '' ?> id="entity_type_id" name="attr[entity_type_id]">
+                                                                            <?php
+                                                                                $entityTypeCode = '';
+                                                                                $entityTypes = $this->getEntityTypes();
+                                                                                $productType = explode(',', $attributeModel->getProductType());
+                                                                                foreach ($entityTypes as $entityType):
+                                                                                    if ($attributeModel->getEntityTypeId() == $entityType['id']) {
+                                                                                        $entityTypeCode = $entityType['entity_type_code'];
+                                                                                    }
+                                                                            ?>
+                                                                                    <option<?php echo ($attributeModel->getEntityTypeId() == $entityType['id']) ? ' selected="selected"' : '' ?> value="<?php echo $entityType['id'] ?>"><?php echo ucfirst(Fox::getCamelCase($entityType['entity_type_code'])) ?></option>
+                                                                            <?php endforeach; ?>
+                                                                                </select>
+                                                                                <div class="description"></div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                            </div>
+                                                            <div class="tab" id="subform2" style="display: block;"><h2>Manage Label / Options</h2>
+                                                                <div class="frm_section">
+                                                                    <h3>Manage Label</h3>
+                                                                    <table cellspacing="5" cellpadding="0" border="0" align="left" >
+                                                                        <tbody>
+                                                                            <tr class="row">
+                                                                                <td width="5%"></td>
+                                                                                <td align="left" width="30%"><label for="frontend_label"><strong>Frontend Label</strong></label></td>
+                                                                                <td class=""><input type="text" value="<?php echo $attributeModel->getFrontendLabel() ?>" name="attr[frontend_label]" id="frontend_label" class="required" />
+                                                                                    <div class="description"></div>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                                <div style="<?php echo (($attributeModel->getInputType() == Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_RADIO) || ($attributeModel->getInputType() == Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_SELECT) || ($attributeModel->getInputType() == Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_MULTISELECT)) ? '' : ' style="display:none;"' ?>" id="option_value_cont" class="frm_section">
+                                                                    <h3>Manage Options</h3>
+                                                                    <table class="attribute_options_cont" id="option_table" cellspacing="5" cellpadding="0" border="0" align="left" >
+                                                                        <tbody>
+                                                                            <tr class="row">
+                                                                                <td align="center"><label><strong>Label</strong></label></td>
+                                                                                <td align="center"><label><strong>Value</strong></label></td>
+                                                                                <td align="center"><label><strong>Position</strong></label></td>
+                                                                                <td align="center"><label><strong>Is Default</strong></label></td>
+                                                                                <td align="left"><button id="add_option_btn" type="button" class="button form-button1"><span>Add New Option</span><span class="plus"></span></button></td>
+                                                                            </tr>
+                                                                    <?php if ($attributeModel->getId()): ?>
+                                                                    <?php
+                                                                                        foreach ($options as $option):
+                                                                                            $optionCount++;
+                                                                    ?>
+                                                                                            <tr id="option_<?php echo $optionCount ?>">
+                                                                                                <td align="center" class="">
+                                                                                                    <input type="text" onblur="copyOptionLabel('<?php echo $optionCount ?>');" value="<?php echo $option['label'] ?>" name="opt[option_label][<?php echo $optionCount ?>]" id="label_<?php echo $optionCount ?>" class="attr_set_txtfd" />
+                                                                                                    <div class="description"></div>
+                                                                                                </td>
+                                                                                                <td align="center" class="">
+                                                                                                    <input type="hidden" id="option_id_<?php echo $optionCount ?>" value="<?php echo $option['id'] ?>" name="opt[option_id][<?php echo $optionCount ?>]" /><input type="text" value="<?php echo $option['value'] ?>" name="opt[option_value][<?php echo $optionCount ?>]" id="value_<?php echo $optionCount ?>" class="attr_set_txtfd" />
+                                                                                                    <div class="description"></div>
+                                                                                                </td>
+                                                                                                <td align="center" class="">
+                                                                                                    <input type="text" value="<?php echo $option['sort_order'] ?>" name="opt[option_position][<?php echo $optionCount ?>]" id="option_position_<?php echo $optionCount ?>" class="integer" />
+                                                                                                    <div class="description"></div>
+                                                                                                </td>
+                                                                                                <td align="center" class="">
+                                                                                                    <input<?php echo ($option['is_default'] == Fox_Eav_Model_Attribute_Option::OPTION_IS_DEFAULT_YES) ? ' checked="checked"' : '' ?> name="opt[option_is_default]" id="option_is_default_<?php echo $optionCount ?>" type="radio" class="rad_cl" value="<?php echo $optionCount ?>" />
+                                                                                                </td>
+                                                                                                <td align="left" class="">
+                                                                                                    <button onclick="removeOption('option_<?php echo $optionCount ?>','<?php echo $option['id'] ?>')" type="button" class="button form-button2"><span>Delete</span><span class="del"></span></button>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                    <?php endforeach; ?>
+                                                                    <?php endif; ?>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                            </form>
+                        </div>
+                        <input type="hidden" name="option_count" value="<?php echo $optionCount ?>" id="option_count" />
+                        <input type="hidden" name="option_increment_id" value="<?php echo $optionCount ?>" id="option_increment_id" />
+                        <script type="text/javascript" src="<?php echo $this->themeUrl('js/form.js') ?>"></script>
+                        <script type="text/javascript">
+                            var foxForm;
+                            var textfieldType='<?php echo Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_TEXTFIELD ?>';
+                            var textareaType='<?php echo Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_TEXTAREA ?>';
+                            var boolType='<?php echo Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_BOOLEAN ?>';
+                            var dateType='<?php echo Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_DATE ?>';
+                            var priceType='<?php echo Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_PRICE ?>';
+                            var radioType='<?php echo Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_RADIO ?>';
+                            var selectType='<?php echo Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_SELECT ?>';
+                            var multiselectType='<?php echo Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_MULTISELECT ?>';
+                            var imageType='<?php echo Fox_Eav_Model_Attribute::ATTRIBUTE_TYPE_FILE ?>';
+                            jQuery(document).ready(function(){
+                                foxForm=jQuery('#<?php echo $this->getId(); ?>').foxForm({});
+                                jQuery('#input_type').bind('change',showDefaultValueElement);
+                                jQuery('#add_option_btn').bind('click',addOption);
+                            });
+                            function showDefaultValueElement(){
+                                var inputType=jQuery('#input_type').val().toLowerCase();
+                                if(inputType==selectType || inputType==multiselectType || inputType==radioType){
+                                    jQuery('#is_unique_cont').show();
+                                    jQuery('#default_value_cont').hide();
+                                    jQuery('#validation_cont').hide();
+                                    jQuery('#option_value_cont').show();
+                                }else{
+                                    if(inputType==textareaType){
+                                        jQuery('#is_unique_cont').show();
+                                        jQuery('#default_value_textfield').hide();
+                                        jQuery('#default_value_boolean').hide();
+                                        jQuery('#default_value_textarea').show();
+                                        jQuery('#validation_cont').hide();
+                                    }else if(inputType==boolType){
+                                        jQuery('#is_unique_cont').show();
+                                        jQuery('#default_value_textarea').hide();
+                                        jQuery('#default_value_textfield').hide();
+                                        jQuery('#default_value_boolean').show();
+                                        jQuery('#validation_cont').hide();
+                                    }else if(inputType==imageType){
+                                        jQuery('#is_unique_cont').hide();
+                                        jQuery('#is_unique').attr('selectedIndex',0);
+                                        jQuery('#default_value_textarea').hide();
+                                        jQuery('#default_value_boolean').hide();
+                                        jQuery('#default_value_textfield').show();
+                                        jQuery('#validation_others').hide();
+                                        jQuery('#validation_image').show();
+                                        jQuery('#validation_cont').show();
+                                    }else{
+                                        jQuery('#is_unique_cont').show();
+                                        jQuery('#default_value_textarea').hide();
+                                        jQuery('#default_value_boolean').hide();
+                                        jQuery('#validation_image').hide();
+                                        if(inputType==priceType){
+                                            jQuery('#validation_others').hide();
+                                            jQuery('#validation_cont').hide();
+                                            jQuery('#default_value_textfield').val('');
+                                            jQuery('#default_value_textfield').addClass('number');
+                                            jQuery('#default_value_textfield').show();
+                                        }else if(inputType==dateType){
+                                            jQuery('#validation_others').hide();
+                                            jQuery('#validation_cont').hide();
+                                            jQuery('#default_value_textfield').hide();
+                                            jQuery('#default_value_date_cont').show();
+                                        }else{
+                                            jQuery('#validation_others').show();
+                                            jQuery('#validation_cont').show();
+                                            jQuery('#default_value_textfield').removeClass('number');
+                                            jQuery('#default_value_textfield').show();
+                                        }
+                                    }
+                                    jQuery('#default_value_cont').show();
+                                    jQuery('#option_value_cont').hide();
+                                }
+                            }
+                            function addOption(){
+                                var incId=jQuery('#option_increment_id').val();
+                                var optCount=jQuery('#option_count').val();
+                                if(incId==''){
+                                    incId=0;
+                                }
+                                if(optCount==''){
+                                    optCount=0;
+                                }
+                                var opts=parseInt(incId)+1;
+                                jQuery('#option_increment_id').val(opts);
+                                jQuery('#option_count').val(parseInt(optCount)+1);
+                                jQuery('#option_table tr:last').after('<tr id="option_'+opts+'"><td class="" align="center"><input type="text" onblur="copyOptionLabel('+opts+')" value="" name="opt[option_label]['+opts+']" id="label_'+opts+'" class="attr_set_txtfd"><div class="description"></div></td><td class="" align="center"><input type="text" value="" name="opt[option_value]['+opts+']" id="value_'+opts+'" class="attr_set_txtfd"><div class="description"></div></td><td class="" align="center"><input type="text" value="" name="opt[option_position]['+opts+']" id="option_position_'+opts+'" class="integer"><div class="description"></div></td><td class="" align="center"><input name="opt[option_is_default]" id="option_is_default_'+opts+'" class="rad_cl" type="radio" value="'+opts+'"></td><td class="" align="left"><button onclick="removeOption(\'option_'+opts+'\',0)" type="button" class="button form-button2"><span>Delete</span><span class="del"></span></button></td></tr>');
+                            }
+                            function removeOption(id,idVal){
+                                jQuery('#option_count').val(parseInt(jQuery('#option_count').val())-1);
+                                jQuery('#'+id).remove();
+                                if(idVal>0){
+                                    jQuery('#option_delete').val(1);
+                                    jQuery('#option_delete_ids').val(jQuery('#option_delete_ids').val()+','+idVal);
+                                }
+                            }
+                            function submitAttributeForm(edit){
+                                if(foxForm.validate()){
+                                    if((jQuery('#id').val()=='' || jQuery('#id').val()==0) && jQuery('#attribute_code')!=null){
+                                        var atrrCode=$('#attribute_code').val();
+                                        if(atrrCode!='' && atrrCode.indexOf(' ')>-1){
+                                            jQuery('#attribute_code').addClass('errors');
+                                            alert('Attribute code should not have spaces');
+                                            return false;
+                                        }
+                                    }
+                                    jQuery.ajax({
+                                        url: '<?php echo $this->getSubmitUrl() ?>'+(edit?'/back/edit':''),
+                type: "POST",
+                data: jQuery(foxForm).serialize(),
+                dataType:"json",
+                success: function(data){
+                    if(data.error){
+                        alert(data.error);
+                    }
+                    if(data.redirectUrl){
+                        window.location=data.redirectUrl;
+                    }
+                }
+            });
+        }
+    }
+    function deleteAttribute(url){
+        if(confirm('Are you sure you want to delete this attribute ?')){
+            window.open(url,'_self','false');
+        }
+    }
+    function copyOptionLabel(opt){
+        if(!jQuery('#value_'+opt).val()){
+            jQuery('#value_'+opt).val(jQuery('#label_'+opt).val());
+        }
+    }
+
+    showDefaultValueElement();
+</script>

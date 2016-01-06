@@ -1,0 +1,78 @@
+<?php
+/**
+ * Zendfox Framework
+ *
+ * LICENSE
+ *
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    views
+ * @package     core_default
+ * @author      Zendfox Team of Unicode Systems <zendfox@unicodesystems.in>
+ * @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ */
+
+/**
+ * Accordian form container
+ * 
+ * @see Fox_Core_View_Admin_Form_Accordion
+ */
+?>
+<link href="<?php echo $this->themeUrl('css/accordion.css') ?>" type="text/css" rel="stylesheet" media="screen" />
+<div id="<?php echo $this->getId(); ?>">
+    <div class="admin_page_title"><table width="100%" cellpadding="0" cellspacing="0"><tr><td><h1><?php echo $this->getHeaderText(); ?></h1></td>
+                <td align="right">
+                    <?php if ($this->getIsBackButtonEnabled()): ?>
+                        <button class="button form-button" onclick="history.back()"><span><?php echo $this->getBackButtonText(); ?></span><span class="back"></span></button>
+                    <?php endif; ?>
+                    <?php if ($this->getIsResetButtonEnabled()): ?>
+                        <button class="button form-button1" onclick="foxForm.reset()"><span><?php echo $this->getResetButtonText(); ?></span><span class="reset"></span></button>
+                    <?php endif; ?>
+                    <?php if ($this->getIsDeleteButtonEnabled() && $this->isEditing()): ?>
+                        <button class="button form-button2" onclick="deleteRecord('<?php echo $this->getDeleteButtonUrl() ?>','<?php echo $this->getDeleteConfirmText() ?>');"><span><?php echo $this->getDeleteButtonText(); ?></span><span class="del"></span></button>
+                    <?php endif; ?>
+                    <?php if ($this->getIsSaveButtonEnabled()): ?>
+                        <button class="button form-button" onclick="foxForm.submit()"><span><?php echo $this->getSaveButtonText(); ?></span><span class="save"></span></button>
+                    <?php endif; ?>    
+                    <?php if ($this->getIsEditButtonEnabled()): ?>
+                        <button class="button form-button" onclick="foxForm.submit({back:'edit'})"><span><?php echo $this->getSaveAndEditButtonText(); ?></span><span class="save"></span></button>
+                    <?php endif; ?>  
+                    <?php foreach ($this->getButtons() as $button): ?>
+                        <button class="button <?php echo (isset($button['style_class']) ? $button['style_class'] : $this->getDefaultStyleClass()) ?>" id="<?php echo (isset($button['id']) ? $button['id'] : '') ?>" name="<?php echo (isset($button['name']) ? $button['name'] : (isset($button['id']) ? $button['id'] : '')) ?>" type="button" onclick="window.open('<?php echo (isset($button['url']) ? $button['url'] : '') ?>','<?php echo (isset($button['window']) ? $button['window'] : '_self') ?>','false')"><span><?php echo (isset($button['button_text']) ? $button['button_text'] : '') ?></span><span class="<?php echo (isset($button['icon_class']) ? $button['icon_class'] : $this->getDefaultIconClass()) ?>"></span></button>
+                    <?php endforeach; ?>
+                    </td></tr></table></div>
+        <div class="table_title_header">
+            <div class="heading_bg">
+                <div class="table_title_header_left"><h1>Details</h1></div></div>
+        </div>
+        <div class="accord_container"><?php echo $this->getContent('__form__') ?></div>
+    </div>
+    <script type="text/javascript" src="<?php echo Fox::getSiteUrl('').'theme/global/js/jaccordion.js' ?>"></script>
+    <script type="text/javascript" src="<?php echo $this->themeUrl('js/formAccordionContainer.js') ?>"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function(){
+            jQuery('#<?php echo $this->getId(); ?> div.accord_container div.accordion').foxFormAccordionContainer({formObj:foxForm,collapse:true, speed:200, menu:true});
+    });
+    function deleteRecord(url,confirmText){
+        if(confirmText=='' || confirm(confirmText)){
+            window.open(url,'_self','false');
+        }
+    }
+    <?php foreach($this->formScripts as $script): ?>
+        <?php echo $script; ?>
+    <?php endforeach; ?>
+</script>

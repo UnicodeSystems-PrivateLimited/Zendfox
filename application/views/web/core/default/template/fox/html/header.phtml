@@ -1,0 +1,115 @@
+<?php
+/**
+ * Zendfox Framework
+ *
+ * LICENSE
+ *
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    views
+ * @package     core_default
+ * @author      Zendfox Team of Unicode Systems <zendfox@unicodesystems.in>
+ * @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ */
+/**
+ * Header content
+ *
+ * @see Fox_Core_View_Html_Header
+ */
+?>
+<?php $memData = Fox::getModel('member/session')->getLoginData(); ?>
+<div class="header gradient">
+    <div class="header-top">
+        <div class="header-top-logo"><a href="<?php echo Fox::getUrl('') ?>"><img src="<?php echo $this->getImageSrc(); ?>" alt="<?php echo $this->getImageAlt(); ?>" /></a></div>
+        <div class="header-top-link">
+            <div class="header-top-link-img">
+<?php if (Fox::getLoggedMember()): ?>
+                <div class="header-logout" >
+                    <a href="<?php echo Fox::getHelper('member/data')->getLogoutUrl() ?>" class="logout_btn"><?php echo $this->_('Logout') ?></a>
+            </div>
+<?php endif; ?>
+                <ul>
+<?php if (!$memData): ?>
+                    <li><a id="control" class="header_login gradient"><?php echo $this->_('Login') ?></a>
+                        <div id="layer" class="popup_login">
+                            <div class="top-arrow"></div>
+                            <form id="login-mini" action="<?php echo Fox::getHelper('member/data')->getLoginUrl() ?>" method="post" >
+                                <span class="field_wrap"><label><?php echo $this->_('Email') ?></label><input name="email_id" class="text_fields" type="text" /></span>
+                                <span class="field_wrap"><label><?php echo $this->_('Password') ?></label><input name="password" class="text_fields" type="password" /></span>
+                                <span class="field_wrap"><a class="frgt" href="<?php echo Fox::getHelper('member/data')->getForgetPasswordUrl() ?>"><?php echo $this->_('Forgot Password?') ?></a></span>
+                                <span class="field_wrap_but"><input value="Submit" type="submit" class="submit_button"/></span>
+                            </form>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="<?php echo Fox::getHelper('member/data')->getRegisterUrl() ?>" class="header_register gradient"><?php echo $this->_('Register') ?></a>
+                    </li>
+<?php else: ?>
+                    <li class="welComeLi">
+                        <span class="welcome-text"><?php echo $this->_('Welcome') ?></span> <a href="<?php echo Fox::getUrl('member') ?>"><?php echo $memData->getFirstName() . '&nbsp;' . $memData->getLastName(); ?></a>
+                    </li>
+<?php endif; ?>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="header-top-menu">
+                <div class="nav_rt"><?php echo $this->getContent('headerMenu'); ?></div>
+    </div>
+</div>
+<script type="text/javascript" >
+    jQuery(function()
+    {
+        var $layer = jQuery('#layer');
+        var $body  = jQuery('html');
+        $layer
+        .bind( 'summon', function( e )
+        {
+            $layer.show().animate({top:'40px'},300);
+            $body.bind( 'click', dismissLayer );
+        } )
+        .bind( 'dismiss', function( e )
+        {
+            $layer.hide().animate({top:'32px'});
+            $body.unbind( 'click', dismissLayer );
+        } )
+        .click( function( e )
+        {
+            e.stopPropagation();
+        })
+        .trigger( 'dismiss' )
+        ;
+        function dismissLayer( e )
+        {
+            $layer.trigger( 'dismiss' );
+        }
+
+        // This is optional - this just triggers the div to 'visible'
+        jQuery('#control').click( function( e )
+        {
+            var $layer = jQuery('#layer:hidden');
+            if ( $layer.length )
+            {
+                $layer.trigger( 'summon' );
+                e.stopPropagation();
+            }
+        } );
+    });
+    jQuery(document).ready(function(){
+        foxForm=jQuery('#login-mini').foxForm({});
+    });
+</script>

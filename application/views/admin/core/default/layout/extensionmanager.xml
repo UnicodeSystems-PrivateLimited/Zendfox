@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Zendfox Framework
+ *
+ * LICENSE
+ *
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    views
+ * @package     core_default
+ * @author      Zendfox Team of Unicode Systems <zendfox@unicodesystems.in>
+ * @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ */
+-->
+<layout>
+    <default>
+        <container key="one-column"/>
+    </default>
+    <admin_connect_index>
+        <container key="one-column"/>
+        <head>
+            <title type="prepend">Fox Extension Manager</title>
+        </head>
+        <ref key="content">
+            <view key="connectManager" class="extensionmanager/admin/manager" tpl="extensionmanager/manager" >
+                <view key="packages" class="extensionmanager/admin/packages" tpl="extensionmanager/installed-pkgs"/>
+            </view>
+        </ref>
+    </admin_connect_index>
+    <admin_generate_index>
+        <head>
+            <title type="prepend">Generated Packages</title>
+        </head>
+        <ref key="content">
+            <view key="generated-pkgs" class="extensionmanager/admin/generate/table" tpl="extensionmanager/generate/pkgs-table"/>
+        </ref>
+    </admin_generate_index>
+</layout>

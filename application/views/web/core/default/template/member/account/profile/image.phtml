@@ -1,0 +1,52 @@
+<?php
+/**
+ * Zendfox Framework
+ *
+ * LICENSE
+ *
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    views
+ * @package     core_default
+ * @author      Zendfox Team of Unicode Systems <zendfox@unicodesystems.in>
+ * @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ */
+
+/**
+ * Member profile image page
+ *
+ * @see Fox_Member_View_Member
+ */
+?>
+<?php 
+$memberData = $this->getCurrentMember();
+?>
+<div class="content-left-main-photo">
+    <div class="content-left-main-photo-img"><img alt="<?php echo $memberData->getFirstName() ?>" src="<?php echo $memberData->getResizedMemberImage($memberData->getMemberImage(),100,100); ?>" />
+    <div class="change-member-img"><a href="<?php echo Fox::getUrl('member/account/edit-image');?>"><?php echo $this->_('Change Image');?></a></div>
+    </div>
+    <div class="content-left-main-photo-text"><strong><?php echo $memberData->getFirstName().' '.$memberData->getLastName();?></strong></div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+    $('.content-left-main-photo-img').hover(function(){
+        $(this).find('.change-member-img').fadeIn('slow');
+    },function(){
+        $(this).find('.change-member-img').fadeOut('fast');
+    });
+    })
+</script>

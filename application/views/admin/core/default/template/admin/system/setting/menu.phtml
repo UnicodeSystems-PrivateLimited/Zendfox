@@ -1,0 +1,54 @@
+<?php
+/**
+ * Zendfox Framework
+ *
+ * LICENSE
+ *
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    views
+ * @package     core_default
+ * @author      Zendfox Team of Unicode Systems <zendfox@unicodesystems.in>
+ * @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ */
+
+
+/**
+ * System configuration menu block
+ *
+ * @see Fox_Admin_View_System_Setting_Menu
+ */
+?>
+<div class="left-menu">
+    <h3 class="heading">Configuration Settings</h3>
+    <div><?php echo $this->getMenuMarkup(); ?></div>
+</div>
+<script type="text/javascript">
+    var item='<?php echo $this->getRequest()->getParam('item') ?>';
+    jQuery(document).ready(function(){
+        jQuery("#setting-menu").jaccordion({collapse:true, speed:200, menu:true}).activate(-1);
+        var url=window.location.href;
+        if(window.location.hash){
+            url=url.substring(0,url.indexOf('#'));
+        }
+        if(item){
+            jQuery("#setting-menu ul li a[href='"+url+"']").parent().addClass('selected');
+        }else{
+            jQuery("#setting-menu ul li a[href='<?php echo Fox::getSiteUrl().Fox::getAdminKey() ?>/system_setting/edit/item/general']").parent().addClass('selected');
+        }
+    });
+</script>

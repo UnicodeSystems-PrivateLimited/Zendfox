@@ -1,0 +1,48 @@
+<?php
+/**
+ * Zendfox Framework
+ *
+ * LICENSE
+ *
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    views
+ * @package     core_default
+ * @author      Zendfox Team of Unicode Systems <zendfox@unicodesystems.in>
+ * @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ */
+
+/**
+ * Print exception
+ * 
+ * @see Fox_Cms_View_Exception
+ */
+?>
+<?php
+ $fileInfo=$this->getErrorFile();
+?>
+<div class="exp_container">
+<h3><?php echo $this->_('There has been an error occurred while processing your request');?></h3>
+    <div class="exception_message">
+ <?php if($this->isExceptionPrintingEnabled()){ ?>
+<span class=""><?php echo nl2br(file_get_contents($fileInfo['filePath'],TRUE)); ?></span>
+    <?php }else{ ?>
+        <span class="exception_message_info"><?php echo $this->_('Exception printing is disabled for security reasons.');?></span>
+        <?php } ?>
+    <div class="log_record"><span class="log_record_text"><?php echo $this->_('Log record number:');?></span><?php echo $fileInfo['fileName'];?></div>
+    </div>
+</div>

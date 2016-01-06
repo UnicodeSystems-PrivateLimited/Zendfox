@@ -1,0 +1,127 @@
+<?php
+/**
+ * Zendfox Framework
+ *
+ * LICENSE
+ *
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    views
+ * @package     core_default
+ * @author      Zendfox Team of Unicode Systems <zendfox@unicodesystems.in>
+* @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ */
+
+/**
+ * Database configuration
+ *
+ * @see Fox_Installer_View_Installer
+ */
+?>
+<div class="steps_left_cont local_main">
+    <h2>Configuration</h2>
+    <?php if ($this->error): ?>
+        <div class="configure_error">Please configure server settings properly before clicking continue.</div>
+        <div class="btn_div">
+            <button class="button" onclick="window.location.reload();" type="button" name="continue" value="Continue" id="continue"><span><span>Continue</span></span></button>
+        </div>
+    <?php else: ?>
+        <form id="configure" name="configure" action="<?php echo $this->getConfigureUrl() ?>" method="post">
+            <div class="local_in database_con">
+                <h3>Database Connection</h3>
+                <ul>
+                    <li><div class="input-box">
+                            <label for="db_host">Host<span class="req">*</span></label>
+                            <input class="required" type="text" name="db_host" id="db_host" value="<?php echo $this->getDbHost() ?>" />
+                            <p style="margin-top:4px; line-height:1.3em; color:#666;"><small>You can specify server port, ex.: localhost:3307<br>If you are not using default UNIX socket, you can specify it here instead of host, ex.: /var/run/mysqld/mysqld.sock</small></p>
+                        </div>
+                        <div class="input-box">
+                            <label for="db_name">Database Name<span class="req">*</span></label>
+                            <input class="required" type="text" name="db_name" id="db_name" value="<?php echo $this->getDbName() ?>" /></div>
+                    </li>
+                    <li><div class="input-box">
+                            <label for="db_username">Username<span class="req">*</span></label>
+                            <input class="required" type="text" name="db_username" id="db_username" value="<?php echo $this->getDbUsername() ?>" />
+                        </div>
+                        <div class="input-box">
+                            <label for="db_password">Password</label>
+                            <input type="password" name="db_password" id="db_password" value="<?php echo $this->getDbPassword() ?>" />
+                        </div>
+                    </li>
+                    <li><div class="input-box">
+                            <label for="db_table_prefix">Table Prefix</label>
+                            <input type="text" name="db_table_prefix" id="db_table_prefix" value="<?php echo $this->getDbTablePrefix() ?>" />
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="local_in web_access">
+                <h3>Web access options</h3>
+                <ul>
+                    <li><div class="input-box">
+                            <label for="site_base_url">Base URL<span class="req">*</span></label>
+                            <input type="text" class="required" name="site_base_url" id="site_base_url" value="<?php echo $this->getSiteBaseUrl() ?>" />
+                        </div>
+                    </li>
+                    <li><div class="input-box">
+                            <label for="site_secure_base_url">Secure Base URL</label>
+                            <input type="text" name="site_secure_base_url" id="site_secure_base_url" value="<?php echo $this->getSiteSecureBaseUrl() ?>" />
+                        </div>
+                    </li>
+                    <li><div class="input-box check-box">
+                            <input type="checkbox" name="site_secure_url_in_frontend" id="site_secure_url_in_frontend" value="1"<?php echo $this->getSiteSecureUrlInFrontend() ? ' checked="checked"' : '' ?> />
+                            <label for="site_secure_url_in_frontend">Use Secure Base URL In Frontend</label>
+                        </div>
+                    </li>
+                    <li><div class="input-box check-box">
+                            <input type="checkbox" name="site_secure_url_in_admin" id="site_secure_url_in_admin" value="1"<?php echo $this->getSiteSecureUrlInAdmin() ? ' checked="checked"' : '' ?> />
+                            <label for="site_secure_url_in_admin">Use Secure Base URL In Backend</label>
+                        </div>
+                    </li>
+                    <li><div class="input-box">
+                            <label for="admin_path">Admin Path<span class="req">*</span></label>
+                            <input type="text" class="required" name="admin_path" id="admin_path" value="<?php echo $this->getAdminPath() ?>" />
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="local_in sess">
+                <h3>Session storage options</h3>
+                <ul>
+                    <li><div class="input-box">
+                            <label for="session_storage">Session Storage</label>
+                            <select name="session_storage" class="required" id="session_storage">
+                                <option value="file"<?php echo $this->getSessionStorage() == 'file' ? 'selected="selected"' : '' ?>>File System</option>
+                                <option value="database"<?php echo $this->getSessionStorage() == 'database' ? 'selected="selected"' : '' ?>>Database</option>
+                            </select>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="btn_div">
+                <span class="req">*Required Fields</span>
+                <button class="button" type="submit" name="Submit" value="Submit" id="submit"><span><span>Submit</span></span></button>
+            </div>
+        </form>
+        <script type="text/javascript">
+            jQuery(document).ready(function(){
+                foxForm=jQuery('#configure').foxForm({});
+            });
+        </script>
+    <?php endif; ?>
+</div>

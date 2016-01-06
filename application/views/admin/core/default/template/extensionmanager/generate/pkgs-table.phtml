@@ -1,0 +1,76 @@
+<?php
+/**
+ * Zendfox Framework
+ *
+ * LICENSE
+ *
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    views
+ * @package     core_default
+ * @author      Zendfox Team of Unicode Systems <zendfox@unicodesystems.in>
+ * @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ */
+/**
+ * Extensionmanager Packages Table view
+ *
+ * @see Fox_Extensionmanager_View_Admin_Generate_Table
+ */
+?>
+<div class="generated-packages">
+    <div class="generated-packages-table">
+        <span class="check-updates-btn"><button class="button form-button1" type="button" onclick="window.open('<?php echo $this->getUrl("*/*/new"); ?>','_self','false')"><span>New Package</span><span class="plus"></span></button></span>
+        <h3 class="install-heading">Generated Packages</h3>
+    </div>
+    <div class="table_container">
+        <table border="0" width="100%" cellspacing="0" cellpadding="0" id="contents-table">
+            <thead>
+                <tr class="table_header">
+                    <th class="table_header_border" align="center" style="width: 50px"><span>S. No.</span></th>
+                    <th class="table_header_border" align="center" style="width: 150px"><span>Name</span></th>
+                    <th class="table_header_border" align="center" style="width: 100px"><span>Version</span></th>
+                    <th class="table_header_border" align="center" style="width: 80px"><span>Action</span></th>
+                    <th class="table_header_border" align="center" style="width: 80px"><span>Download</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if($data = $this->getAllGeneratedPackages()):?>
+                    <?php $i = 0; foreach ($data as $item):?>
+                <tr class="package-row <?php if(($i % 2) == 0){ echo "table_even_row"; }else{ echo "table_odd_row"; } ?>" onclick="window.open(this.title,'_self','false')" title="<?php echo $this->getUrl("*/*/load",array("package"=>$item[Fox_Extensionmanager_Model_Generate_Package::PACKAGE_NAME_ELEMENT],"version"=>$item[Fox_Extensionmanager_Model_Generate_Package::PACKAGE_VERSION_ELEMENT])); ?>" style="cursor: pointer" >
+                            <td align="center"><span><?php echo $i+1;?></span></td>
+                            <td><span><?php echo $item[Fox_Extensionmanager_Model_Generate_Package::PACKAGE_NAME_ELEMENT];?></span></td>
+                            <td align="center"><span><?php echo $item[Fox_Extensionmanager_Model_Generate_Package::PACKAGE_VERSION_ELEMENT];?></span></td>
+                            <td align="center"><span><a title="Load" href="<?php echo $this->getUrl("*/*/load",array("package"=>$item[Fox_Extensionmanager_Model_Generate_Package::PACKAGE_NAME_ELEMENT],"version"=>$item[Fox_Extensionmanager_Model_Generate_Package::PACKAGE_VERSION_ELEMENT])); ?>"><?php echo "load";?></a></span></td>
+                            <td align="center"><span><a title="Download Package" href="<?php echo $this->getUrl("*/*/download",array("package"=>$item[Fox_Extensionmanager_Model_Generate_Package::PACKAGE_NAME_ELEMENT],"version"=>$item[Fox_Extensionmanager_Model_Generate_Package::PACKAGE_VERSION_ELEMENT])); ?>"><?php echo "download";?></a></span></td>
+                        </tr>
+                    <?php $i++; endforeach;?>
+                <?php else: ?>
+                    <tr class="table_records_empty" align="center">
+                        <td colspan="5">No Records Found</td>
+                    </tr>
+                <?php endif;?>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+    jQuery("body").addClass("pkg-generator");
+    jQuery(document).ready(function(){
+        jQuery(".package-row").hover(function(){jQuery(this).addClass("hover");
+        },function(){jQuery(this).removeClass("hover");});
+    });
+</script>

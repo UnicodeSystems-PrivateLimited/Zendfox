@@ -1,0 +1,60 @@
+<?php
+/**
+ * Zendfox Framework
+ *
+ * LICENSE
+ *
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    views
+ * @package     core_default
+ * @author      Zendfox Team of Unicode Systems <zendfox@unicodesystems.in>
+ * @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ */
+/**
+ * Admin footer content 
+ *
+ * @see Fox_Core_View_Template
+ */
+?>
+<div class="footer">
+    <div class="version_cl">Zendfox ver. <?php echo Fox::getVersion() ?></div>
+    <div class="link_right"><a href="http://www.zendfox.com/">Connect with the Zendfox Community</a></div>
+</div>
+<script type="text/javascript">
+    jQuery(document).ready(function(){        
+        jQuery(window).bind("resize",function(){
+            manageHeight();
+        });        
+        manageHeight();          
+    });
+    function manageHeight(){
+        var wh=jQuery(window).height()-170;        
+        var ch1=jQuery('div.admin_left_col').height();
+        var ch2=jQuery('div.admin_mid_col').height();
+        var ch3=jQuery('div.admin_right_col').height();
+        var ch=Math.max(Math.max(ch1,ch2),ch3);
+        if(wh>ch){
+            var $el=jQuery('.accord_container');
+            if($el.length>0){                
+                $el.css("min-height",wh-116);
+            }else{                
+                jQuery('.admin_container').css("min-height",wh+8);
+            }
+        }
+    }
+</script>

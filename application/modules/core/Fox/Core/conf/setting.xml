@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Zendfox Framework
+ *
+ * LICENSE
+ *
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    Fox
+ * @package     Fox_Core
+ * @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ */
+-->
+<settings>
+    <setting>
+        <menu name="website_configuration" label="Website Configuration" module="website_configuration" order="0" />
+        <menu name="system" label="System" module="admin" order="4" />        
+    </setting>
+    <items>
+        <item name="general" label="General" menu="website_configuration" order="0">
+            <sections>
+                <section name="website" label="Website Information" order="0">
+                    <field name="name" label="Website Name" inputType="text" order="0" />
+                    <field name="contact" label="Website Contact Telephone" inputType="text" order="1" />
+                    <field name="address" label="Website Contact Address" inputType="textarea" order="2" />
+                </section>
+            </sections>
+        </item>
+    </items>
+    <items>
+        <item name="web" label="Web" menu="website_configuration" order="0">
+            <sections>
+                <section label="Unsecure" name="unsecure" order="0">
+                    <field name="base_url" label="Base URL" inputType="text" order="0" />
+                </section>
+                <section label="Secure" name="secure" order="1">
+                    <field name="base_url" label="Base URL" inputType="text" order="0" />
+                    <field name="use_in_frontend" label="Use Secure URLs in Frontend" inputType="select" order="1">
+                        <options>
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </options>
+                    </field>
+                    <field name="use_in_admin" label="Use Secure URLs in Admin" inputType="select" order="2">
+                        <options>
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </options>
+                    </field>
+                </section>
+                <section label="Design" name="design" order="2">
+                    <field name="package" label="Current Package Name" inputType="text" order="0" />
+                    <field name="theme" label="Current Theme Name" inputType="text" order="1" />
+                </section>
+                <section label="HTML Head" name="head" order="3">
+                    <field name="favicon_image" label="Favicon Icon" inputType="file" order="0" />
+                    <field name="default_title" label="Default Title" inputType="text" order="1">
+                        <default>Zendfox (WAF)</default>
+                    </field>
+                    <field name="title_prefix" label="Title Prefix" inputType="text" order="2">
+                    </field>
+                    <field name="title_suffix" label="Title Suffix" inputType="text" order="3" />
+                    <field name="default_description" label="Default Description" inputType="textarea" order="4">
+                        <default>Zendfox (WAF)</default>
+                    </field>
+                    <field name="default_keywords" label="Default Keywords" inputType="textarea" order="5">
+                        <default>Zendfox (WAF)</default>
+                    </field>
+                    <field name="default_robots" label="Default Robots" inputType="select" order="6">
+                        <default>INDEX, FOLLOW</default>
+                        <options>
+                            <option value="INDEX, FOLLOW">INDEX, FOLLOW</option>
+                            <option value="NOINDEX, FOLLOW">NOINDEX, FOLLOW</option>
+                            <option value="INDEX,NOFOLLOW">INDEX,NOFOLLOW</option>
+                            <option value="NOINDEX,NOFOLLOW">NOINDEX,NOFOLLOW</option>
+                        </options>
+                    </field>
+                    <field name="miscellaneous_scripts" label="Miscellaneous Scripts" inputType="textarea" order="7" />
+                </section>
+                <section label="Header" name="header" order="4">
+                    <field name="logo_image_src" label="Logo Image Src" inputType="text" order="0">
+                        <default>images/logo.png</default>
+                    </field>
+                    <field name="logo_image_alt" label="Logo Image Alt" inputType="text" order="1">
+                        <default>Go to Home</default>
+                    </field>                   
+                </section>
+            </sections>
+        </item>
+    </items>
+    <items>
+        <item name="website_email_addresses" label="Website Email Addresses" menu="website_configuration" order="0">
+            <sections>
+                <section label="General Contact" name="general" order="0">
+                    <field name="sender_name" label="Sender Name" inputType="text" order="0" />
+                    <field name="sender_email" label="Sender Email" inputType="text" order="1" />
+                </section>               
+                <section label="Custom Email 1" name="custom1" order="1">
+                    <field name="sender_name" label="Sender Name" inputType="text" order="0" />
+                    <field name="sender_email" label="Sender Email" inputType="text" order="1" />
+                </section>
+                <section label="Custom Email 2" name="custom2" order="2">
+                    <field name="sender_name" label="Sender Name" inputType="text" order="0" />
+                    <field name="sender_email" label="Sender Email" inputType="text" order="1" />
+                </section>
+            </sections>
+        </item>
+    </items>
+    <items>
+        <item name="core" label="Core" menu="system" order="0">
+            <sections>
+                <section name="debug" label="Debug Options" order="0">
+                    <field name="profiler" label="Profiler" inputType="select" order="0">
+                        <default>0</default>
+                        <options>
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </options>
+                    </field>
+                    <field name="template_hints" label="Template Path Hints" inputType="select" order="1">
+                        <default>0</default>
+                        <options>
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </options>
+                    </field>
+                    <field name="exception_printing" label="Exception Printing" inputType="select" order="2">
+                        <default>0</default>
+                        <options>
+                            <option value="0">Disable</option>
+                            <option value="1">Enable</option>
+                        </options>
+                    </field>
+                </section>
+                <section name="session" label="Session" order="1">
+                    <field name="storage_type" label="Save Session In" inputType="select" order="0">
+                        <options>
+                            <option value="file">File System</option>
+                            <option value="database">Database</option>
+                        </options>
+                    </field>
+                </section>
+            </sections>
+        </item>
+    </items>
+</settings>

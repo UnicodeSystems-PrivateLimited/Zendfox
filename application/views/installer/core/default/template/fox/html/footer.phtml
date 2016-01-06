@@ -1,0 +1,58 @@
+<?php
+/**
+ * Zendfox Framework
+ *
+ * LICENSE
+ *
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    views
+ * @package     core_default
+ * @author      Zendfox Team of Unicode Systems <zendfox@unicodesystems.in>
+ * @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ */
+
+/**
+ * Footer content 
+ *
+ * @see Fox_Core_View_Template
+ */
+?>
+<div class="footer">
+    <div class="footer-btm">Powered By: Zendfox (WAF)</div>
+</div>
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        jQuery(window).bind("resize",function(){
+            manageHeight();
+        });
+        manageHeight();
+    });
+    function manageHeight(){
+        var wh=jQuery(window).height()-189;
+        if(jQuery.browser.msie && jQuery.browser.version=='7.0'){
+            wh=jQuery(window).height()-145;
+        }
+        var ch1=jQuery('div.content-left').height();
+        var ch2=jQuery('div.content-mid').height();
+        var ch3=jQuery('div.content-right').height();
+        var ch=Math.max(Math.max(ch1,ch2),ch3);
+        if(wh>ch){
+            jQuery('.content').css("min-height",wh);
+        }
+    }
+</script>

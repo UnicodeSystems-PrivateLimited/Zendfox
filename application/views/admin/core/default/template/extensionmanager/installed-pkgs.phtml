@@ -1,0 +1,128 @@
+<?php
+/**
+ * Zendfox Framework
+ *
+ * LICENSE
+ *
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    views
+ * @package     core_default
+ * @author      Zendfox Team of Unicode Systems <zendfox@unicodesystems.in>
+ * @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ */
+/**
+ * Extensionmanager Installed Packages Table view
+ *
+ * @see Fox_Extensionmanager_View_Admin_Packages
+ */
+?>
+<?php
+$data = $this->getInstalledPackages();
+$updates = null;
+if ($data && $this->getRequest()->getParam("updates") == "yes") {
+    $updates = $this->getUpdates($data);
+}
+?>
+<div class="generaed-pkgs">
+                        <span class="check-updates-btn">
+                        <?php if($data && !$updates):?>
+                            <button type="button" class="button form-button" onclick="window.open('<?php echo $this->getUrl("*/*/index", array("updates" => "yes")); ?>','_self','false')"><span>Check Updates</span></button>
+                        <?php endif;?>
+                        </span>
+    <div class="table_container">
+        <table border="0" width="100%" cellspacing="0" cellpadding="0" id="contents-table">
+            <thead>
+<!--                <tr class="table_header">
+                    <th colspan="4" align="left">
+            <h3>Installed Packages</h3>
+        </th>
+                        <th>
+                        </th>-->
+                </tr>
+            <tr class="table_header">
+                <th class="table_header_border" align="center" style="width: 6%"><span>S. No.</span></th>
+                <th class="table_header_border" align="center" style="width: 22%"><span>Name</span></th>
+                <th class="table_header_border" align="center" style="width: 32%"><span>Version</span></th>
+                <th class="table_header_border" align="center" style="width: 15%"><span>Stability</span></th>
+                <th class="table_header_border" align="center" style="width: 25%"><span>Action</span></th>
+            </tr>
+            </thead>
+            <tbody>
+                <?php if ($data): ?>
+                    <?php
+                    $i = 0;
+                    foreach ($data as $item):
+                        ?>
+                        <tr class="package-row <?php
+                if (($i % 2) == 0) {
+                    echo "table_even_row";
+                } else {
+                    echo "table_odd_row";
+                }
+                        ?>" title="<?php echo $item[Fox_Extensionmanager_Model_Generate_Package::PACKAGE_NAME_ELEMENT]; ?>" style="cursor: pointer" >
+                            <td align="center"><span><?php echo $i + 1; ?></span></td>
+                            <td align="center"><span><?php echo $item[Fox_Extensionmanager_Model_Generate_Package::PACKAGE_NAME_ELEMENT]; ?></span></td>
+                            <td align="center">
+                                <span><?php echo $item[Fox_Extensionmanager_Model_Generate_Package::PACKAGE_VERSION_ELEMENT]; ?></span>
+                                <?php if ($updates && isset($updates[$item["key"]])): ?>
+                                <span>
+                                    <ul>
+                                        <?php foreach ($updates[$item["key"]] as $u): ?>
+                                        <li>available <?php echo $u["version_key"]?> (<?php echo Fox::getModel("extensionmanager/package/state")->getOptionText($u["stability"])?>)</li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                </span>
+                                <?php endif; ?>
+                            </td>
+                            <td align="center"><span><?php echo $item[Fox_Extensionmanager_Model_Generate_Package::PACKAGE_STABILITY_ELEMENT] ?></span></td>
+                            <td align="center">
+                                <span>
+                                    <a title="Reinstall Extension" href="javascript:void(0)" onclick="reinstallPackage('<?php echo $ik = Fox::getHelper("extensionmanager/data")->encrypt($item["key"])?>')"><?php echo "reinstall"; ?></a>
+                                    <a title="Uninstall Extension" href="javascript:void(0)" onclick="uninstallPackage('<?php echo $ik?>')"><?php echo "uninstall"; ?></a>
+                                    <?php if ($updates && isset($updates[$item["key"]])): ?>
+                                        <span>
+                                            <select name="upgrade_to" onchange="upgradeTo(this.value,'<?php echo Fox::getHelper("extensionmanager/data")->encrypt($item["key"]);?>')">
+                                                <option value=""></option>
+                                                <?php foreach ($updates[$item["key"]] as $u): ?>
+                                                    <option value="<?php echo Fox::getHelper("extensionmanager/data")->encrypt($u["version_key"])?>">upgrade to version <?php echo $u["version"]?> (<?php echo Fox::getModel("extensionmanager/package/state")->getOptionText($u["stability"])?>) </option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </span>
+                                    <?php endif; ?>
+                                </span>
+                            </td>
+                        </tr>
+                        <?php
+                        $i++;
+                    endforeach;
+                    ?>
+                <?php else: ?>
+                    <tr class="table_records_empty" align="center">
+                        <td colspan="5">No Records Found</td>
+                    </tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        jQuery(".package-row").hover(function(){jQuery(this).addClass("hover");
+        },function(){jQuery(this).removeClass("hover");});
+    });
+</script>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Zendfox Framework
+ *
+ * LICENSE
+ *
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    views
+ * @package     core_default
+ * @author      Zendfox Team of Unicode Systems <zendfox@unicodesystems.in>
+ * @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ */
+-->
+<layout>
+    
+    <!-- Define available containers -->
+    <define>
+        <containers>
+            <container key="no-layout" tpl="fox/no-layout"/>
+            <container key="one-column" tpl="fox/one-column"/>
+            <container key="two-columns-left" tpl="fox/two-columns-left"/>
+            <container key="two-columns-right" tpl="fox/two-columns-right"/>
+            <container key="three-columns" tpl="fox/three-columns"/>
+        </containers>
+    </define>
+    <container key="three-columns" />
+    <ref key="content">
+        <view key="messages" class="core/template" tpl="fox/html/messages"/>
+    </ref>
+    <view key="left" class="core/list" />
+    <view key="right" class="core/list" />
+    <view key="content" class="core/list" />
+    <view key="header_links" class="core/links" />         
+    <view key="head" class="core/html/head" tpl="fox/html/head" />
+    <view key="header" class="core/html/header" tpl="fox/html/header" />
+    <view key="footer" class="core/template" tpl="fox/html/footer" />
+    <head>
+        <title>Zendfox Installation Wizard</title>
+        <script src="theme/global/js/jquery/jquery-1.4.4.min.js" type="text/javascript" language="javascript" _global="global"/>
+        <link href="css/style.css" type="text/css" rel="stylesheet" />
+        <link href="css/style-ie.css" type="text/css" rel="stylesheet" if="IE" />
+    </head>
+</layout>

@@ -1,0 +1,65 @@
+<?php
+/**
+ * Zendfox Framework
+ *
+ * LICENSE
+ *
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    views
+ * @package     core_default
+ * @author      Zendfox Team of Unicode Systems <zendfox@unicodesystems.in>
+ * @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ */
+/**
+ * Banner content
+ * 
+ * @see Fox_Core_View_Template
+ */
+?>
+<div class="banner">
+    <div class="main-banner">
+        <div class="banner-content1 gradient">
+            <div class="banner-text">
+                <img src="<?php echo $this->themeUrl('images/banner/banner-text.png') ?>" alt="" width="292" height="86" />
+            </div>
+            <div class="banner-img">
+                <img src="<?php echo $this->themeUrl('images/banner/banner-img.png') ?>" alt="" width="160" height="155" />
+            </div>
+        </div>
+        <div class="banner-content2 gradient">
+            <div class="banner-text">
+                <img src="<?php echo $this->themeUrl('images/banner/banner-text.png') ?>" alt="" width="292" height="86" />
+            </div>
+            <div class="banner-img">
+                <img src="<?php echo $this->themeUrl('images/banner/banner-img.png') ?>" alt="" width="160" height="155" />
+            </div>
+        </div>
+        <div class="banner-content3 gradient">
+            <div class="banner-text">
+                <img src="<?php echo $this->themeUrl('images/banner/banner-text.png') ?>" alt="" width="292" height="86" />
+            </div>
+            <div class="banner-img">
+                <img src="<?php echo $this->themeUrl('images/banner/banner-img.png') ?>" alt="" width="160" height="155" />
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="<?php echo $this->themeUrl('js/jbanner.js') ?>"></script>
+<script type="text/javascript">// <![CDATA[
+    jQuery(document).ready(function() {jQuery(".main-banner").jbanner({duration: 250});});
+ // ]]></script>

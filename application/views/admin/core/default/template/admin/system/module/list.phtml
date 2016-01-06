@@ -1,0 +1,134 @@
+<?php
+/**
+ * Zendfox Framework
+ *
+ * LICENSE
+ *
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    views
+ * @package     core_default
+ * @author      Zendfox Team of Unicode Systems <zendfox@unicodesystems.in>
+ * @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ */
+/**
+ * Module list page
+ *
+ * @see Fox_Admin_View_System_Module
+ */
+?>
+<?php
+$modules = $this->getModuleList();
+$installedModulesCollection = $this->getInstalledModulesCollection();
+$enabledModules = array();
+$disabledInstalledModules = array();
+$disabledUninstalledModules = array();
+$installedModules = array();
+foreach ($installedModulesCollection as $installedModule) {
+    $installedModules[$installedModule['name']] = $installedModule['status'];
+}
+$unInstalledModules=array_diff(array_keys($installedModules), array_keys($modules));
+foreach ($modules as $key => $module) {
+    if (!array_key_exists($key, $installedModules)) {
+        if (($module['status'] != Fox_Core_Model_Module::STATUS_ENABLED)) {
+            $disabledUninstalledModules[$key] = $module['status'];
+        }
+    }
+    if (($module['status'] == Fox_Core_Model_Module::STATUS_ENABLED)) {
+        if(array_key_exists($key, $installedModules) && $installedModules[$key] == Fox_Core_Model_Module::STATUS_ENABLED){
+            $enabledModules[$key] = $module['status'];
+        }
+    }else{
+        if (array_key_exists($key, $installedModules)) {
+            $disabledInstalledModules[$key] = $module['status'];
+            $installedModules[$key]['status'] = Fox_Core_Model_Module::STATUS_DISABLED;
+        }
+    }
+}
+$this->updateModulesStatus($disabledInstalledModules);
+$this->deleteModules($unInstalledModules);
+ksort($modules);
+?>
+<div id="<?php echo $this->getId(); ?>">
+    <div class="admin_page_title">
+        <table width="100%" cellpadding="0" cellspacing="0">
+            <tr>
+                <td>
+                    <h1><?php echo $this->getHeaderText(); ?></h1>
+                </td>
+                <td align="right">
+                    <button type="button" class="button form-button" onclick="history.back()"><span><?php echo $this->getBackButtonText(); ?></span><span class="back"></span></button>
+                    <button type="button" class="button form-button1" onclick="foxForm.reset()"><span><?php echo $this->getResetButtonText(); ?></span><span class="reset"></span></button>
+                    <button id="submit_form_btn" type="button" onclick="foxForm.submit();" class="button form-button"><span><?php echo $this->getSaveButtonText(); ?></span><span class="save"></span></button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="table_title_header">
+        <div class="heading_bg">
+            <div class="table_title_header_left"><h1>Details</h1></div>
+        </div>
+    </div>
+    <div class="accord_container">
+        <div class="form_cont">
+            <div class="tab_cont_bg_top">
+                <div class="tab_cont_bg_bottom">
+                    <div class="tab_cont_bg_left">
+                        <div class="tab_cont_bg_right">
+                            <div class="tab_cont_bg_top_left">
+                                <div class="tab_cont_bg_bottom_left">
+                                    <div class="tab_cont_bg_top_right">
+                                        <div class="tab_cont_bg_bottom_right">
+                                            <div class="tab_cont_bg">
+                                                <div class="tab_content_container">
+                                                    <form id="<?php echo $this->getId(); ?>_form" action="<?php echo $this->getSaveButtonUrl() ?>" name="<?php echo $this->getId(); ?>_form" method="post">
+                                                        <ul>
+                                                            <?php
+                                                            foreach ($modules as $key => $value):
+                                                                ?>
+                                                                <?php if (!array_key_exists($key, $disabledUninstalledModules)): ?>
+                                                                    <li>
+                                                                        <span class="mod_text"><?php echo $key ?></span>
+                                                                        <span class="mod_field">
+                                                                            <select <?php echo (array_key_exists($key, $disabledInstalledModules) ? 'disabled="disabled"' : ''); ?> name="<?php echo $key ?>">
+                                                                                <option value="<?php echo Fox_Core_Model_Module::STATUS_ENABLED ?>"<?php echo (array_key_exists($key, $enabledModules)) ? ' selected="selected"' : '' ?>>Enable</option>
+                                                                                <option value="<?php echo Fox_Core_Model_Module::STATUS_DISABLED ?>"<?php echo (!array_key_exists($key, $enabledModules)) ? ' selected="selected"' : '' ?>>Disable</option>
+                                                                            </select>
+                                                                        </span>
+                                                                    </li>
+                                                                <?php endif; ?>
+                                                            <?php endforeach; ?>
+                                                        </ul>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="<?php echo $this->themeUrl('js/form.js') ?>"></script>
+<script type="text/javascript">
+    var foxForm;
+    foxForm=jQuery('#<?php echo $this->getId(); ?>_form').foxForm({});
+</script>

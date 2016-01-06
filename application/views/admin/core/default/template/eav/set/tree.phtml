@@ -1,0 +1,275 @@
+<?php
+/**
+ * Zendfox Framework
+ *
+ * LICENSE
+ *
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    views
+ * @package     core_default
+ * @author      Zendfox Team of Unicode Systems <zendfox@unicodesystems.in>
+ * @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ */
+
+/**
+ * Edit attribute set page tree block
+ *
+ * @see Fox_Eav_View_Admin_Set_Edit_Tree
+ */
+?>
+<?php
+$attributeSetModel = $this->getAttributeSet();
+?>
+<div class="box_container">
+    <div class="attribute_set">
+        <div class="box_top_mid">
+            <div class="box_bottom_mid">
+                <div class="box_left_mid">
+                    <div class="box_right_mid">
+                        <div class="box_top_left">
+                            <div class="box_bottom_left">
+                                <div class="box_top_right">
+                                    <div class="box_bottom_right">
+                                        <div class="box_content">
+                                            <div class="box_content_container">
+                                                <h2>Edit Set Name</h2>
+                                                <form id="<?php echo $this->getId() ?>_form" method="post" name="<?php echo $this->getId() ?>_form" action="<?php echo $this->getUpdateUrl() ?>">
+                                                <table width="100%" border="0" cellspacing="0">
+                                                    <tr>
+                                                        <td><label>Name*</label></td>
+                                                        <td>
+                                                            <input id="attribute_set_name" name="attribute_set_name" value="<?php echo $attributeSetModel->getAttributeSetName() ?>" type="text" />
+                                                            <input id="attribute_set_tree" type="hidden" name="attribute_set_tree" value="{}"/>
+                                                            <input id="id" type="hidden" name="id" value="<?php echo $attributeSetModel->getId() ?>"/>
+                                                            <input id="unassigned_attributes_prev" type="hidden" name="unassigned_attributes_prev" value="<?php echo $this->getUnassignedAttributeIds($attributeSetModel->getEntityTypeId()) ?>"/>
+                                                            <input id="groups_prev" type="hidden" name="groups_prev" value="<?php echo $this->getGroupIds() ?>"/>
+                                                            <input id="unassigned_attribute_set_tree" type="hidden" name="unassigned_attribute_set_tree" value="{}"/>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="groups_attr">
+        <div class="groups">
+            <div class="attribute_set">
+                <div class="box_top_mid">
+                    <div class="box_bottom_mid">
+                        <div class="box_left_mid">
+                            <div class="box_right_mid">
+                                <div class="box_top_left">
+                                    <div class="box_bottom_left">
+                                        <div class="box_top_right">
+                                            <div class="box_bottom_right">
+                                                <div class="box_content">
+                                                    <div class="box_content_container">
+                                                        <h2>Groups</h2>
+                                                        <div class="group_content">
+                                                            <div class="tree_act_btns">
+                                                                <button id="act_add_group" class="button form-button"><span>Add Group</span><span class="plus"></span></button>
+                                                                <button id="act_delete_group" class="button form-button2"><span>Delete Group</span><span class="del"></span></button>
+                                                                <button id="act_rename_group" class="button form-button1"><span>Rename Group</span><span class="edit"></span></button>
+                                                            </div>
+                                                            <div class="set_tree" id="<?php echo $this->getId(); ?>"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="unassigned_attr"><div class="attribute_set">
+                <div class="box_top_mid">
+                    <div class="box_bottom_mid">
+                        <div class="box_left_mid">
+                            <div class="box_right_mid">
+                                <div class="box_top_left">
+                                    <div class="box_bottom_left">
+                                        <div class="box_top_right">
+                                            <div class="box_bottom_right">
+                                                <div class="box_content">
+                                                    <div class="box_content_container">
+                                                        <h2>Unassigned Attributes</h2>
+                                                        <div class="unassign_content">
+                                                            <div class="set_tree" id="<?php echo $this->getUnassignedId(); ?>"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div></div>
+    </div>
+</div>
+<script type="text/javascript" src="<?php echo $this->baseUrl('theme/global/js/debugger.js') ?>"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl('theme/global/js/tree/_lib/jquery.cookie.js') ?>"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl('theme/global/js/tree/_lib/jquery.hotkeys.js') ?>"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl('theme/global/js/tree/jquery.jstree.js') ?>"></script>
+<script type="text/javascript" src="<?php echo $this->themeUrl('js/attributeSetTree.js') ?>"></script>
+<script type="text/javascript" src="<?php echo $this->themeUrl('js/form.js') ?>"></script>
+<script type="text/javascript">
+    var attribSetTree;
+    var unassignedAttribTree;
+    jQuery(document).ready(function(){
+        foxForm=jQuery('#<?php echo $this->getId(); ?>_form').foxForm({});
+        jQuery(foxForm).submit(submitAttributeSetForm);
+        attribSetTree= jQuery('#<?php echo $this->getId(); ?>')
+        .jstree({
+            "plugins" : [ "themes", "json_data","ui", "crrm", "cookies", "dnd", "types"],
+            "json_data" : {
+                "data":<?php echo $this->getTreeData(); ?>
+            },
+            "themes":{
+                "theme":"apple"
+            },
+            "types" : {
+                "max_depth" : -2,
+                "max_children" : -2,
+                "valid_children" : [ "group" ],
+                "types" : {
+                    "attrib_user" : {
+                        "valid_children" : "none",
+                        "icon" : {
+                            "image" : "<?php echo Fox::getThemeUrl('images/tree/attrib_16.png') ?>"
+                        }
+                    },
+                    "attrib_system" : {
+                        "valid_children" : "none",
+                        "icon" : {
+                            "image" : "<?php echo Fox::getThemeUrl('images/tree/attrib_delete_16.png') ?>"
+                        },
+                        "delete_node" : false,
+                        "remove" : false
+                    },
+                    "group" : {
+                        "valid_children" : [ "attrib_user","attrib_system" ],
+                        "icon" : {
+                            "image" : "<?php echo Fox::getThemeUrl('images/tree/attrib_group_16.png') ?>"
+                        }
+                    }
+                }
+            }
+        }).bind("create.jstree", function (e, data) {           
+        }).bind("remove.jstree", function (e, data) {
+            if(data.rslt.obj.attr("rel")!="group"){
+                data.inst.refresh();
+            }
+        }).bind("rename.jstree", function (e, data) {
+            if(data.rslt.obj.attr("rel")!="group"){
+                jQuery.jstree.rollback(data.rlbk);
+            }
+        });
+        unassignedAttribTree=jQuery('#<?php echo $this->getUnassignedId(); ?>')
+        .jstree({
+            "plugins" : [ "themes", "json_data","ui", "crrm", "cookies", "dnd", "search", "types"],
+            "json_data" : {
+                "data":<?php echo $this->getUnassignedAttributeData($attributeSetModel->getEntityTypeId()); ?>
+            },
+            "themes":{
+                "theme":"apple"
+            },
+            "types" : {
+                "max_depth" : -2,
+                "max_children" : -2,
+                "valid_children" : [ "none"],
+                "types" : {
+                    "attrib_user" : {
+                        "valid_children" : "none",
+                        "icon" : {
+                            "image" : "<?php echo Fox::getThemeUrl('images/tree/attrib_16.png') ?>"
+                        }
+                    },
+                    "group" : {
+                        "valid_children" : [ "attrib_user" ],
+                        "icon" : {
+                            "image" : "<?php echo Fox::getThemeUrl('images/tree/attrib_group_16.png') ?>"
+                        }
+                    }
+                }
+            }
+        });
+        jQuery(".tree_act_btns button").click(function(e){
+            switch(this.id){
+                case "act_add_group":
+                    var nameStr="";
+                    if(jQuery.trim(nameStr=prompt("Enter Group Name"))!=""){
+                        jQuery('#<?php echo $this->getId(); ?>').jstree("create", -1, "last", { "attr" : { "rel" : "group"},"data":nameStr},false,true);
+                    }
+                    break;
+                case "act_delete_group":
+                    jQuery('#<?php echo $this->getId(); ?>').jstree("remove");
+                    break;
+                case "act_rename_group":
+                    jQuery('#<?php echo $this->getId(); ?>').jstree("rename");
+                    break;
+                }
+            });
+        });        
+        function updateTreeJsonField(){
+            jQuery('#attribute_set_tree').val(jQuery.jdebug(jQuery('#<?php echo $this->getId(); ?>').jstree('get_json',-1)));
+            jQuery('#unassigned_attribute_set_tree').val(jQuery.jdebug(jQuery('#<?php echo $this->getUnassignedId(); ?>').jstree('get_json',-1)));
+        }
+        function submitAttributeSetForm(edit){
+            if(foxForm.validate()){
+                updateTreeJsonField();
+                jQuery.ajax({
+                    url: '<?php echo $this->getUpdateUrl() ?>'+(edit?'/back/edit':''),
+                    type: "POST",
+                    data: jQuery(foxForm).serialize(),
+                    dataType:"json",
+                    success: function(data){
+                        if(data.error){
+                            alert(data.error);
+                        }
+                        if(data.redirectUrl){
+                            window.location=data.redirectUrl;
+                        }
+                    }
+                });
+            }
+            return false;
+        }
+        function deleteAttributeSet(url){
+            if(confirm('Are you sure you want to delete this attribute set ?')){
+                window.open(url,'_self','false');
+            }
+        }
+        function reloadSet(){
+            window.location.reload();
+        }
+</script>

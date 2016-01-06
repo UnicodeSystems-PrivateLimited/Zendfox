@@ -1,0 +1,183 @@
+<?php
+/**
+ * Zendfox Framework
+ *
+ * LICENSE
+ *
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    views
+ * @package     core_default
+ * @author      Zendfox Team of Unicode Systems <zendfox@unicodesystems.in>
+ * @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ */
+
+/**
+ * Zendfox table
+ * 
+ * @see Fox_Core_View_Admin_Table
+ */
+?>
+<?php
+$collection = $this->getCollection();
+$actions = $this->getGroupActions();
+$exCp = !empty($actions);
+if (!$this->isAjax()):
+    ?>
+    <script type="text/javascript" src="<?php echo $this->themeUrl('js/form.js') ?>"></script>
+    <script type="text/javascript" src="<?php echo $this->themeUrl('js/table.js') ?>"></script>
+    <div class="data_table" id="<?php echo $this->getId(); ?>"><?php endif; ?>
+    <div class="table_cp">
+        <div class="table_cp_left">
+            <div class="table_cp_record text_style1">Records
+                <select class="select_fd" name="itemCount" id="itemCount">
+                    <?php foreach ($this->getItemCountOptions() as $itemCount) {
+                        ?>
+                        <option value="<?php echo $itemCount ?>" <?php echo (($collection->getItemCountPerPage() == $itemCount) ? 'selected="selected"' : '') ?>><?php echo $itemCount ?></option>
+                    <?php } ?>
+                </select>
+                per page.</div>
+            <div class="table_cp_button">
+                <ul class="cp_btn_nav">
+                    <li><div class="btn_cp first<?php echo (($collection->getCurrentPageNumber() > 1) ? '' : ' disable') ?>"></div></li>
+                    <li><div class="btn_cp pre <?php echo (($collection->getCurrentPageNumber() > 1) ? '' : ' disable') ?>"></div></li>
+                    <li><div class="txfd_num"><?php echo ($collection->getTotalItemCount()>0?($collection->getItemCountStart().'-'.$collection->getItemCountEnd().' of '.$collection->getTotalItemCount()):0) ?></div></li>
+                    <li><div class="btn_cp next<?php echo (($collection->getCurrentPageNumber() < $collection->count()) ? '' : ' disable') ?>"></div></li>
+                    <li><div class="btn_cp last<?php echo (($collection->getCurrentPageNumber() < $collection->count()) ? '' : ' disable') ?>"></div></li>
+                </ul>
+            </div>
+            <div class="table_cp_page text_style1">Page <input type="text" class="txfd_num page_no" value="<?php echo ($collection->getTotalItemCount()>0?$collection->getCurrentPageNumber():0); ?>"/> of <?php echo $collection->count(); ?></div>
+        </div>
+        <div class="table_cp_right">
+            <ul>
+                <?php if ($this->getIsExportEnabled()): ?>
+                    <li>
+                        <form id="exportForm" name="exportForm" method="post" action="<?php echo $this->getExportButtonUrl() ?>">
+                            <select name="exportType" class="required" id="exportType">
+                                <option value=""></option>
+                                <option value="<?php echo Fox_Core_View_Admin_Table::EXPORT_TYPE_CSV ?>">CSV</option>
+                                <option value="<?php echo Fox_Core_View_Admin_Table::EXPORT_TYPE_XML ?>">XML</option>
+                            </select>
+                            <button type="submit" class="button form-button1"><span>Export</span><span class="export"></span></button>
+                        </form>
+                    </li>
+                <?php endif ?>
+                <li><button type="button" class="button form-button reset"><span>Reset Filter</span><span class="reset"></span></button></li>
+                <li><button type="button" class="button form-button search"><span>Search</span><span class="search"></span></button></li>
+            </ul>
+        </div>
+    </div>
+    <?php if ($exCp): ?>
+        <div class="table_cp"><table border="0" width="100%" cellspacing="0" cellpadding="0">                
+                <tbody>
+                    <tr>
+                        <td style="vertical-align:middle;"><ul class="cp_btn_select"><li class="all first">Select All</li><li class="none">Unselect All</li><li class="current">Select Current</li><li class="current-none last">Unselect Current</li><li class="group-action-count"><span class="rec_count">0</span> Record(s) Selected</li></ul></td>
+                        <td align="right"><div><form id="groupActionForm" name="groupActionForm"><label>Action:</label>
+                                    <select id="tableGroupAction" class="required">
+                                        <option></option>
+                                        <?php
+                                        foreach ($actions as $k => $action):
+                                            ?>
+                                            <option value="<?php echo $k; ?>"><?php echo $action['label']; ?></option>                                            
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <?php
+                                    foreach ($actions as $k => $action):
+                                        if (isset($action['dependent'])) {
+                                            ?>
+                                            <div id="<?php echo 'groupaction_' . $k . '_dependent'; ?>" class="groupaction-dependent">
+                                                <?php foreach ($action['dependent'] as $dependent): ?>
+                                                    <label><?php echo $dependent['label'] ?></label>
+                                                    <?php
+                                                    $dependent['name']="dependent[$k][${dependent['name']}]";
+                                                    $elementMarkup=$this->getElementMarkup($dependent);
+                                                    echo $elementMarkup;
+                                                    ?>
+                                            <?php endforeach; ?>
+                                            </div>
+                                        <?php } ?>
+    <?php endforeach; ?>
+                                    <button type="button" class="button form-button"><span>Submit</span><span class="save"></span></button>
+                                </form></div></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+<?php endif; ?>
+    <div class="table_container"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td><table class="table_data" width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <colgroup>                           
+                            <?php
+                            $columns = $this->getColumns();
+                            $types = array();
+                            ?>
+                            <?php foreach ($columns as $k => $column) {
+                                $types[$k] = $column['type']; ?>
+                                <col <?php echo (isset($column['width']) ? 'width="' . $column['width'] . '"' : ''); ?> />
+<?php } ?>
+                        </colgroup>
+                        <thead>
+                            <tr class="table_header">
+                                <?php foreach ($columns as $column) { ?>
+                                    <td align="center" class="table_header_border">
+                                        <?php if(isset($column['sorting']) && !$column['sorting']): ?>
+                                            <span class="col-title<?php echo (isset($column['class']) && $column['class'])?(' '.$column['class']):''; ?>"><?php echo $column['label'] ?></span>
+                                        <?php else: ?>
+                                            <a class="sort<?php echo (isset($column['class']) && $column['class'])?(' '.$column['class']):''; ?>" name="<?php echo $column['field']; ?>" href="#"><span class="col-title"><?php echo $column['label'] ?></span></a>
+                                        <?php endif ?>
+                                    </td>
+                                 <?php } ?>
+                            </tr>                                    
+                            <tr align="center" class="table_sec_header">
+                                <?php foreach ($columns as $column) { ?>
+                                    <td class="table_header_border" valign="top"><?php echo $column['filterMarkup']; ?></td><?php } ?>
+                            </tr>        
+                        </thead>        
+                        <tbody>
+                            <?php
+                            if($collection->getTotalItemCount()>0):
+                            ?>
+                            <?php
+                            $ri = 0;
+                            foreach ($collection as $item):
+                                ?>
+                                <tr class="<?php echo (($ri % 2) ? 'table_even_row' : 'table_odd_row') ?>" align="center" title="<?php echo $this->getRowUrl($item); ?>">
+                                    <?php foreach ($columns as $column) { ?>
+                                        <td<?php echo (isset($column['style']) ? ' style="' . $column['style'] . '"' : ''); ?><?php echo (isset($column['align']) ? ' align="' . $column['align'] . '"' : ''); ?><?php echo (isset($column['class']) ? ' class="' . $column['class'] . '"' : ''); ?>><?php echo $this->renderTableCell($item, $column); ?></td>
+                                <?php } ?>
+                                </tr>
+                                <?php
+                                $ri++;
+                            endforeach;
+                            ?>
+                                <?php else: ?>
+                                <tr class="table_records_empty" align="center">
+                                    <td colspan="<?php echo count($columns) ?>">No Records Found</td>
+                                </tr>
+                           <?php endif ?>
+                        </tbody>
+                    </table></td>
+            </tr>
+        </table></div>
+    <script type="text/javascript">
+        jQuery(document).ready(function(){
+            jQuery('#exportForm').foxForm({});
+            jQuery('#<?php echo $this->getId(); ?>').foxTable({url:'<?php echo $this->getAjaxUrl() ?>',recCount:<?php echo $collection->getItemCountPerPage(); ?>,page:<?php echo $collection->getCurrentPageNumber(); ?>,pageCount:<?php echo $collection->count(); ?>,params:<?php echo $this->getParamsJson() ?>,totalRec:<?php echo $collection->getTotalItemCount(); ?>,colTypes:'<?php echo Zend_Json_Encoder::encode($types); ?>',groupAction:<?php echo Zend_Json_Encoder::encode($actions); ?>});
+        });
+    </script>
+<?php if (!$this->isAjax()): ?></div><?php endif; ?>

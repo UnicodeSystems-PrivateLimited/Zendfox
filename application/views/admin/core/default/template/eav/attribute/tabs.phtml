@@ -1,0 +1,55 @@
+<?php
+/**
+ * Zendfox Framework
+ *
+ * LICENSE
+ *
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    views
+ * @package     core_default
+ * @author      Zendfox Team of Unicode Systems <zendfox@unicodesystems.in>
+ * @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ */
+
+/**
+ * Add|Edit attribute page container
+ *
+ * @see Fox_Eav_View_Admin_Attribute_Add
+ */
+?>
+<div id="<?php echo $this->getId(); ?>">
+    <div class="admin_page_title"><table width="100%" cellpadding="0" cellspacing="0"><tr><td><h1><?php echo $this->getHeaderText(); ?></h1></td>
+                <td align="right">
+                    <button type="button" class="button form-button" onclick="history.back()"><span><?php echo $this->getBackButtonText(); ?></span><span class="back"></span></button>
+                    <button type="button" class="button form-button1" onclick="foxForm.reset()"><span><?php echo $this->getResetButtonText(); ?></span><span class="reset"></span></button>
+                    <?php if ($this->isEditing()): ?><button type="button" class="button form-button2" onclick="deleteAttribute('<?php echo $this->getDeleteButtonUrl() ?>')"><span><?php echo $this->getDeleteButtonText(); ?></span><span class="del"></span></button><?php endif; ?>
+                    <button id="submit_form_btn" type="button" onclick="submitAttributeForm(false);" class="button form-button"><span><?php echo $this->getSaveButtonText(); ?></span><span class="save"></span></button>
+                    <button id="submit_and_edit_form_btn" type="button" class="button form-button" onclick="submitAttributeForm(true);"><span><?php echo $this->getSaveAndEditButtonText(); ?></span><span class="save"></span></button>
+                    </td></tr></table></div>
+        <div class="table_title_header">
+            <div class="heading_bg">
+                <div class="table_title_header_left"><h1>Details</h1></div></div>
+        </div>
+        <div class="tab_container"><?php echo $this->getContent('__form__') ?></div>
+    </div>
+    <script type="text/javascript" src="<?php echo $this->themeUrl('js/formTabContainer.js') ?>"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function(){
+            jQuery('#<?php echo $this->getId(); ?>').foxFormTabContainer({formObj:foxForm});
+    });
+</script>

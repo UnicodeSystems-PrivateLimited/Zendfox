@@ -1,0 +1,63 @@
+<?php
+/**
+ * Zendfox Framework
+ *
+ * LICENSE
+ *
+ * This file is part of Zendfox.
+ *
+ * Zendfox is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Zendfox is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zendfox in the file LICENSE.txt.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category    views
+ * @package     core_default
+ * @author      Zendfox Team of Unicode Systems <zendfox@unicodesystems.in>
+ * @copyright   Copyright (c) 2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license     http://www.gnu.org/licenses/  GNU General Public License
+ */
+
+/**
+ * Newsletter subscription form
+ *
+ * @see Fox_Newsletter_View_Subscriber
+ */
+?>
+<div class="right_cont newsletter_wrap">
+<h2 class="sub-heading"><?php echo $this->_('Newsletter Subscription') ?></h2>
+<div class="newsletter_cont">
+    <form name="newsletter-signup" id="newsletter-signup" method="post" action="<?php echo $this->getSubscriberPostUrl() ?>" >
+        <table width="100%" class="newsletter_table" cellpadding="0" cellspacing="0">
+            <tr class="row">
+                <td class="label"><label><?php echo $this->_('Name') ?><em>*</em></label>  </td>
+                </tr>
+                <tr class="row">
+                <td class="ele"><input type="text" name="name" id="name" class="text_fields required"/></td>
+            </tr>
+            <tr class="row">
+                <td class="label"><label><?php echo $this->_('Email') ?><em>*</em></label>  </td>
+                </tr>
+                <tr class="row">
+                <td class="ele"><input type="text" name="email" id="email"  class="text_fields required email"/></td>
+            </tr>
+            <tr>
+                <td><input type="submit" class="submit_button" value="Register" /></td></tr>
+        </table>
+        
+    </form>
+</div>
+</div>
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        foxForm=jQuery('#newsletter-signup').foxForm({});
+    });
+</script>
